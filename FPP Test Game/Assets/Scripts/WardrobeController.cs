@@ -15,17 +15,49 @@ public class WardrobeController : MonoBehaviour
         Instance = this;
     }
 
-    public bool isAnyOtherWardrobeAlreadySelected(Wardrobe wardrobe)
+    public void SetSelectedWardrobe(Wardrobe newSelectedWardrobe)
     {
-        if (selectedWardrobe != null)
+        if (selectedWardrobe == null)
         {
-            if (selectedWardrobe != wardrobe)
-                return true;
-            else 
-                return false;
+            Debug.Log("seleceted new wardrobe");
+            selectedWardrobe = newSelectedWardrobe;
+
+            // first selected wardrobe
+            // open wardrobe
         }
         else
-            return false;
+        {
+            if (newSelectedWardrobe != selectedWardrobe)
+            {
+                Debug.Log("deseleceted wardrobe" + selectedWardrobe.name);
+                selectedWardrobe.OnDeselect();
+                selectedWardrobe = null;
+
+               
+
+                // close old
+            }
+            else
+            {
+                if (selectedWardrobe.GetWardobeState() != Wardrobe.WardrobeState.Opened)
+                    selectedWardrobe.TryToOpen();
+            }
+        }
     }
 
+
+
+    public bool isAnyOtherWardrobeOpen(Wardrobe asker)
+    {
+        foreach (var wardrobe in wardrobes)
+        {
+            if (wardrobe == asker)
+                continue;
+
+            if (wardrobe.GetWardobeState() != Wardrobe.WardrobeState.Closed)
+                return true;
+        }
+        return false;
+    }
+    
 }
