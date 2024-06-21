@@ -8,4 +8,9 @@ public class BaseInteractiveObject : MonoBehaviour
     {
 
     }
+
+    public virtual void OnDeselect()
+    {
+
+    }
 }
