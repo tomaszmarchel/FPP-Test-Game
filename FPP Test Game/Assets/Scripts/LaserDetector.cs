@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LaserDetector : MonoBehaviour
 {
-    private Transform contactPoint;
     [SerializeField] Transform rayStartPoint;
 
     private void Update()
@@ -14,8 +13,7 @@ public class LaserDetector : MonoBehaviour
         if (hitInfo.transform != null)
         {
             var hittedGameObjectParent = hitInfo.transform;
-            //Player.Instance.SetSelectedItem(hittedGameObjectParent);
-            Debug.Log(hittedGameObjectParent.name);
+            Player.Instance.SetSelectedItem(hittedGameObjectParent);
         }
     }
 }

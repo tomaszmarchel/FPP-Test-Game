@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    private Transform selectedGameObject;
+    
+    private BaseInteractiveObject interactiveObject;
 
     private void Awake()
     {
@@ -14,11 +15,25 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+
+
     }
+
+
 
     public void SetSelectedItem(Transform selectedItem)
     {
-        selectedGameObject = selectedItem;
+        isSelectedItemWardrobe(selectedItem);
+    }
+
+
+
+    private void isSelectedItemWardrobe(Transform selectedObject)
+    {
+        if (selectedObject.TryGetComponent<Wardrobe>(out Wardrobe selectedWardrobe))
+        {
+            interactiveObject = selectedWardrobe;
+            interactiveObject.OnSelect();
+        }
     }
 }
