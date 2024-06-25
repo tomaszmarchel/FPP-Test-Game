@@ -19,14 +19,10 @@ public class Player : MonoBehaviour
 
     }
 
-
-
     public void SetSelectedItem(Transform selectedItem)
     {
         isSelectedItemWardrobe(selectedItem);
     }
-
-
 
     private void isSelectedItemWardrobe(Transform selectedObject)
     {

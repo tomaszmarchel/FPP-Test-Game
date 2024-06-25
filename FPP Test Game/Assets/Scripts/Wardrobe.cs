@@ -115,8 +115,6 @@ public class Wardrobe : BaseInteractiveObject
             }
             yield return null;
         }
-
-
     }
 
     public IEnumerator CloseCoroutine()
