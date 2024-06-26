@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     
     private BaseInteractiveObject interactiveObject;
     private MoveableObject aimedMoveableObject;
+    private IMoveableObjectParent avatarSlot;
 
     private MoveableObject holdingObject;
     [SerializeField] private Transform holdItemPoint;
@@ -18,13 +19,26 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         Instance = this;
     }
 
-    void Update()
+    private void Start()
+    {
+        GameInput.Instance.OnMouseButtonUp += GameInput_OnMouseButtonUp;
+
+    }
+
+    private void GameInput_OnMouseButtonUp(object sender, EventArgs e)
     {
         if (holdingObject != null)
         {
-            if (!GameInput.Instance.isMouseButtonDown)
+            if (avatarSlot != null)
             {
-                holdingObject.SetMoveableObjectParent(holdingObject.defaultParent);
+                if (avatarSlot.GetSlotType() == holdingObject.GetMoveableObjectSO().itemType)
+                    holdingObject.SetMoveableObjectParent(avatarSlot);
+                else
+                    holdingObject.DestroySelf();
+            }
+            else
+            {
+                holdingObject.DestroySelf();
             }
         }
     }
@@ -67,7 +81,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         }
     }
 
-    public void LookingOnNothing()
+    public void NotLookingOnAnyInteractiveObject()
     {
         if (aimedMoveableObject != null)
         {
@@ -76,7 +90,18 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         }
     }
 
+    public void NotLookingOnAnySlot()
+    {
+        if (avatarSlot != null)
+        {
+            avatarSlot = null;
+        }
+    }
 
+    public void AimingOnSlot(IMoveableObjectParent moveableObjectParent)
+    {
+        avatarSlot = moveableObjectParent;
+    }
 
 
     // interface
@@ -104,5 +129,10 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     public bool HasSelectedMoveableObject()
     {
         return holdingObject != null;
+    }
+
+    public MoveableObjectsTypes.Type GetSlotType()
+    {
+        return holdingObject.GetMoveableObjectSO().itemType;
     }
 }

@@ -13,6 +13,8 @@ public class GameInput : MonoBehaviour
     public bool isMouseButtonDown = false;
 
 
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +28,8 @@ public class GameInput : MonoBehaviour
             isMouseButtonDown = true;
         else
             isMouseButtonDown = false;
-
+    
+        if (Input.GetMouseButtonUp(0))
+            OnMouseButtonUp(this, EventArgs.Empty);
     }
 }

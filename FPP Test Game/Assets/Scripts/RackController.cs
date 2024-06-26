@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class RackController : MonoBehaviour
 {
-    [SerializeField] private MoveableObjectSlot[] moveableSlots;
+    [SerializeField] private MoveableObjectSlotBase[] moveableSlots;
 }

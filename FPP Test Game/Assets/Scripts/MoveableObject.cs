@@ -20,7 +20,6 @@ public class MoveableObject : MonoBehaviour
     [SerializeField] Material[] outlineYellowMaterialArray;
     [SerializeField] Material[] outlineGreenMaterialArray;
 
-    public IMoveableObjectParent defaultParent;
 
     public enum OutlineState
     {
@@ -34,7 +33,6 @@ public class MoveableObject : MonoBehaviour
     private void Start()
     {
         state = OutlineState.None;
-        defaultParent = transform.parent.GetComponent<IMoveableObjectParent>();
     }
 
 

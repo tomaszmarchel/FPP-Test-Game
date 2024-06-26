@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveableWardobeSlot : MoveableObjectSlotBase
+public class MoveableAvatarSlot : MoveableObjectSlotBase
 {
-    [SerializeField] MoveableObject originalMoveableObejct;
+    // Start is called before the first frame update
     void Start()
     {
-        MoveableObject.SpawnArmoryObject(originalMoveableObejct.GetMoveableObjectSO(), this);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (moveableObjectInSlot == null)
-            MoveableObject.SpawnArmoryObject(originalMoveableObejct.GetMoveableObjectSO(), this);
+        
     }
 
     public override Transform GetSpawnPoint()
@@ -40,5 +39,10 @@ public class MoveableWardobeSlot : MoveableObjectSlotBase
     public override bool HasSelectedMoveableObject()
     {
         return moveableObjectInSlot != null;
+    }
+
+    public override MoveableObjectsTypes.Type GetSlotType()
+    {
+        return slotType;
     }
 }
