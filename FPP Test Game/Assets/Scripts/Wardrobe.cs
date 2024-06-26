@@ -56,7 +56,10 @@ public class Wardrobe : BaseInteractiveObject
     public void TryToOpen()
     {
         if (CanIOpen())
-            Open();
+        {
+           StopCorountines();
+           Open();
+        }
         else
             WaitToOpen();
     }

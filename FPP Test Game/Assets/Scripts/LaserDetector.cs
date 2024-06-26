@@ -12,6 +12,7 @@ public class LaserDetector : MonoBehaviour
 
         if (hitInfo.transform != null)
         {
+
             var hittedGameObjectParent = hitInfo.transform;
             Player.Instance.SetSelectedItem(hittedGameObjectParent);
         }

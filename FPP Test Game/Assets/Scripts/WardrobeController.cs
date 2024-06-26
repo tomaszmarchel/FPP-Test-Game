@@ -32,10 +32,6 @@ public class WardrobeController : MonoBehaviour
                 Debug.Log("deseleceted wardrobe" + selectedWardrobe.name);
                 selectedWardrobe.OnDeselect();
                 selectedWardrobe = null;
-
-               
-
-                // close old
             }
             else
             {
