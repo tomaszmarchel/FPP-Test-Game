@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1324553803112024121}
   - component: {fileID: 8282582197062918457}
   - component: {fileID: 1299360067885721618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveableObjectSO: {fileID: 11400000, guid: 4b3b57709799ec54a97683d98b705377, type: 2}
   isAimedOnMe: 0
+  selectedOnMe: 0
+  hasSkinnedMeshRenderer: 0
+  meshRenderer: {fileID: 1184956605995809858}
+  skinnedMeshRenderer: {fileID: 0}
+  defaultMaterials:
+  - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  outlineYellowMaterialArray:
+  - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  - {fileID: 2100000, guid: c9d41f09bedb0e04f9eaaeee374da3b6, type: 2}
+  outlineGreenMaterialArray:
+  - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  - {fileID: 2100000, guid: 4ac485d864a362a459001afbeca532aa, type: 2}
 --- !u!65 &1299360067885721618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,6 +150,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+--- !u!23 &1184956605995809858 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -605573585618362364, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  m_PrefabInstance: {fileID: 7487618973374766150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6945646514224446381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}

@@ -7,10 +7,10 @@ public static class MoveableObjectsTypes
 {
     public enum Type
     {
-        Helm,
+        Helmet,
         Gloves,
         Shoes,
-        West,
+        Kevlar,
         Belt,
         GasMask,
         Weapons,

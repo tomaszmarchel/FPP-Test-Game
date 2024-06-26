@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kevlar
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3463724824187972572, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -136,7 +140,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7052359442683497474}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 663460823949162663}
   m_SourcePrefab: {fileID: 100100000, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
+--- !u!137 &4829939129214098383 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8914600296015120139, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
+  m_PrefabInstance: {fileID: 5138499763787653946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5444561259912552043 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f6e6ad0ffde64742ae97e7291d674ab, type: 3}
@@ -155,3 +167,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveableObjectSO: {fileID: 11400000, guid: cd1514ab86ee48c47b577f2d40a08cf1, type: 2}
+  isAimedOnMe: 0
+  selectedOnMe: 0
+  hasSkinnedMeshRenderer: 1
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 4829939129214098383}
+  defaultMaterials:
+  - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  outlineYellowMaterialArray:
+  - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
+  - {fileID: 2100000, guid: c9d41f09bedb0e04f9eaaeee374da3b6, type: 2}
+  outlineGreenMaterialArray:
+  - {fileID: 2100000, guid: 4ac485d864a362a459001afbeca532aa, type: 2}
+--- !u!65 &663460823949162663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444561259912552043}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4984792, y: 0.5676546, z: 0.37050486}
+  m_Center: {x: -0.0051881075, y: -0.0051881075, z: 0.0034587383}

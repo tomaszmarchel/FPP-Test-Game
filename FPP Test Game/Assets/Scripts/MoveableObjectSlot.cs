@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class MoveableObjectSlot : MonoBehaviour, IMoveableObjectParent
 {
-    [SerializeField] MoveableObject moveableObject;
-    [SerializeField] Transform spawnPoint;
+    protected MoveableObject moveableObject;
+    protected Transform spawnPoint;
+
+    public MoveableObjectsTypes.Type slotType;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        MoveableObject.SpawnArmoryObject(moveableObject.GetMoveableObjectSO(), this);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     //interface
 
