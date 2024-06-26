@@ -13,8 +13,8 @@ public class MoveableObject : MonoBehaviour
     public bool selectedOnMe = false;
 
     [SerializeField] bool hasSkinnedMeshRenderer = false;
-    [SerializeField] MeshRenderer meshRenderer;
-    [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] MeshRenderer[] meshRenderers;
+    [SerializeField] SkinnedMeshRenderer[] skinnedMeshRenderers;
 
     [SerializeField] Material[] defaultMaterials;
     [SerializeField] Material[] outlineYellowMaterialArray;
@@ -108,17 +108,29 @@ public class MoveableObject : MonoBehaviour
         if (state == OutlineState.Aimed)
         {
             if (hasSkinnedMeshRenderer)
-                skinnedMeshRenderer.SetMaterials(outlineYellowMaterialArray.ToList());
+            {
+                foreach(SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
+                    skinnedMeshRenderer.SetMaterials(outlineYellowMaterialArray.ToList());
+            }
             else
-                meshRenderer.SetMaterials(outlineYellowMaterialArray.ToList());
+            {
+                foreach (MeshRenderer meshRenderer in meshRenderers)
+                    meshRenderer.SetMaterials(outlineYellowMaterialArray.ToList());
+            }
 
         }
         else if (state == OutlineState.Seleceted)
         {
             if (hasSkinnedMeshRenderer)
-                skinnedMeshRenderer.SetMaterials(outlineGreenMaterialArray.ToList());
+            {
+                foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
+                    skinnedMeshRenderer.SetMaterials(outlineGreenMaterialArray.ToList());
+            }
             else
-                meshRenderer.SetMaterials(outlineGreenMaterialArray.ToList());
+            {
+                foreach (MeshRenderer meshRenderer in meshRenderers)
+                    meshRenderer.SetMaterials(outlineGreenMaterialArray.ToList());
+            }
         }
     }
 
@@ -128,9 +140,15 @@ public class MoveableObject : MonoBehaviour
         state = OutlineState.None;
 
         if (hasSkinnedMeshRenderer)
-            skinnedMeshRenderer.SetMaterials(defaultMaterials.ToList());
+        {
+            foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
+                skinnedMeshRenderer.SetMaterials(defaultMaterials.ToList());
+        }
         else
-            meshRenderer.SetMaterials(defaultMaterials.ToList());
+        {
+            foreach (MeshRenderer meshRenderer in meshRenderers)
+                meshRenderer.SetMaterials(defaultMaterials.ToList());
+        }
 
     }
 }

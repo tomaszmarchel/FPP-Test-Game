@@ -6,13 +6,24 @@ using UnityEngine.EventSystems;
 
 public class LaserDetector : MonoBehaviour
 {
+    public static LaserDetector Instance { get; private set; }
+
     [SerializeField] Transform rayStartPoint;
     [SerializeField] LayerMask interactiveObjectlayerMask;
     [SerializeField] LayerMask slotlayerMask;
 
+    public bool detectInteractiveObjects = true;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
-        DetectInteractiveObjects();
+        if (detectInteractiveObjects)
+            DetectInteractiveObjects();
+
         DetectAvatarSlots();
     }
 

@@ -32,7 +32,16 @@ public class Player : MonoBehaviour, IMoveableObjectParent
             if (avatarSlot != null)
             {
                 if (avatarSlot.GetSlotType() == holdingObject.GetMoveableObjectSO().itemType)
-                    holdingObject.SetMoveableObjectParent(avatarSlot);
+                {
+                    if (avatarSlot.GetMoveableObject() == null)
+                    {
+                        holdingObject.SetMoveableObjectParent(avatarSlot);
+                    }
+                    else
+                    {
+                        holdingObject.DestroySelf();
+                    }
+                }
                 else
                     holdingObject.DestroySelf();
             }
@@ -45,7 +54,6 @@ public class Player : MonoBehaviour, IMoveableObjectParent
 
     public void SetSelectedItem(Transform selectedItem)
     {
-
         if (selectedItem.TryGetComponent<Wardrobe>(out Wardrobe selectedWardrobe))
         {
             WardrobeInteraction(selectedWardrobe);
@@ -103,6 +111,16 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         avatarSlot = moveableObjectParent;
     }
 
+    public void AimingOnWardrobe(Wardrobe wardrobe)
+    {
+        WardrobeInteraction(wardrobe);
+    }
+
+    public void AimingOnMoveableObject(MoveableObject moveableObject)
+    {
+        MoveableItemAimedAt(moveableObject);
+    }
+
 
     // interface
 
@@ -114,6 +132,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     public void SetMoveableObject(MoveableObject moveableObject)
     {
         this.holdingObject = moveableObject;
+        LaserDetector.Instance.detectInteractiveObjects = false;
     }
 
     public MoveableObject GetMoveableObject()

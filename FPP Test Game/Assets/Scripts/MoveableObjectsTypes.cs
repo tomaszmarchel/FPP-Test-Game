@@ -9,6 +9,7 @@ public static class MoveableObjectsTypes
     {
         Helmet,
         Gloves,
+        Pants,
         Shoes,
         Kevlar,
         Belt,

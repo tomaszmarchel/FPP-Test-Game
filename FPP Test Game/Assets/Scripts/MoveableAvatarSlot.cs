@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveableAvatarSlot : MoveableObjectSlotBase
 {
+    [SerializeField] private Transform visualTransparentBox;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,13 @@ public class MoveableAvatarSlot : MoveableObjectSlotBase
     // Update is called once per frame
     void Update()
     {
-        
+        if (GetMoveableObject() != null)
+            visualTransparentBox.gameObject.SetActive(false);
+        else
+        {
+            if (!visualTransparentBox.gameObject.activeSelf)
+                visualTransparentBox.gameObject.SetActive(true);
+        }
     }
 
     public override Transform GetSpawnPoint()

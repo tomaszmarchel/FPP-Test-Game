@@ -170,8 +170,9 @@ MonoBehaviour:
   isAimedOnMe: 0
   selectedOnMe: 0
   hasSkinnedMeshRenderer: 1
-  meshRenderer: {fileID: 0}
-  skinnedMeshRenderer: {fileID: 4829939129214098383}
+  meshRenderers: []
+  skinnedMeshRenderers:
+  - {fileID: 4829939129214098383}
   defaultMaterials:
   - {fileID: 8624324665017985746, guid: 0b9fc8b1c23e7664a9f836f8b716a09e, type: 3}
   outlineYellowMaterialArray:
@@ -198,5 +199,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4984792, y: 0.5676546, z: 0.37050486}
-  m_Center: {x: -0.0051881075, y: -0.0051881075, z: 0.0034587383}
+  m_Size: {x: 0.37161595, y: 0.46253943, z: 0.29076195}
+  m_Center: {x: -0.0070004463, y: 0.0074982643, z: 0.007083416}
