@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeasuringDevice : MonoBehaviour
@@ -17,14 +18,20 @@ public class MeasuringDevice : MonoBehaviour
 
     private void GameInput_OnTakeMeasurement(object sender, System.EventArgs e)
     {
-        Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 4f, doorLayerMask);
+        Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 6f, doorLayerMask);
         if (hitInfo.transform != null)
         {
             var hittedSlot = hitInfo.transform;
             if (hittedSlot.TryGetComponent<Door>(out Door door))
             {
-                GetDoorValue(door);
-                measuringDeviceVisual.SetVisualNumber(GetDoorValue(door));
+                if (!door.doorDestroyded)
+                {
+                    GetDoorValue(door);
+                    measuringDeviceVisual.SetVisualNumber(GetDoorValue(door));
+
+                    if (door.doorNeutralized)
+                        door.doorCheckedAfterNeutralization = true;
+                }
             }
         }
         else

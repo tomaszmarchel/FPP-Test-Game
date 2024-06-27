@@ -15,7 +15,11 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnTakeMeasurement;
     public event EventHandler OnWeaponShoot;
 
+    public event EventHandler OnInteraction;
+
     public bool isMouseButtonDown = false;
+    private Player player;
+
 
     InputActions inputActions;
 
@@ -26,6 +30,8 @@ public class GameInput : MonoBehaviour
 
         inputActions = new InputActions();
         inputActions.Player.Enable();
+
+        player = Player.Instance;
     }
 
     // Update is called once per frame
@@ -46,14 +52,18 @@ public class GameInput : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Z))
                 OnDecreaseRing?.Invoke(this, EventArgs.Empty);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.X))
                 OnIncreaseRing?.Invoke(this, EventArgs.Empty);
 
             if (Input.GetKeyDown(KeyCode.R))
                 OnTakeMeasurement?.Invoke(this, EventArgs.Empty);
+
+            if (player.canInteract)
+                if (Input.GetKeyDown(KeyCode.E))
+                    OnInteraction?.Invoke(this, EventArgs.Empty);
 
             if (Input.GetMouseButtonDown(0))
                 OnWeaponShoot?.Invoke(this, EventArgs.Empty);

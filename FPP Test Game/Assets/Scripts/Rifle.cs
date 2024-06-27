@@ -9,26 +9,19 @@ public class Rifle : MonoBehaviour
 
     [SerializeField] LayerMask doorLayerMask;
 
+    private Player owner;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameInput.Instance.OnWeaponShoot += GameInput_OnWeaponShoot;
+        owner = Player.Instance;
     }
-
-    private void GameInput_OnWeaponShoot(object sender, System.EventArgs e)
-    {
-        Shoot();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void Shoot()
     {
+        // Add visuals 
+
+
         Physics.Raycast(shootStartPoint.position, shootStartPoint.forward, out RaycastHit hitInfo, 4f, doorLayerMask);
         if (hitInfo.transform != null)
         {
@@ -38,20 +31,36 @@ public class Rifle : MonoBehaviour
                 var adjustmentRingValue = adjustmentRing.GetRingValue();
                 var doorValue = door.GetDoorValue();
 
-                if (adjustmentRingValue == doorValue)
+                if (doorValue == 0)
                 {
-                    Debug.Log("good shoot");
-                    // good shot
+                    door.DestroyDoor();
+                    owner.DecreasePlayerHP();
                 }
                 else
                 {
-                    Debug.Log("bad shoot");
-                    // destroy doors
+                    if (adjustmentRingValue == doorValue)
+                    {
+                        door.NeutralizeDoor();
+                    }
+                    else
+                    {
+                        door.DestroyDoor();
+                        owner.DecreasePlayerHP();
+
+                        if (adjustmentRingValue > doorValue)
+                        {
+                            GameStatistics.higherRingValue++;
+                        }
+                        else if (adjustmentRingValue < doorValue)
+                        {
+                            GameStatistics.lowerRingValue++;
+                        }
+                    }
                 }
             }
         }
-        Debug.Log("shoot not in doors");
     }
+
 
     public int GetAdjustmentRingValue()
     {

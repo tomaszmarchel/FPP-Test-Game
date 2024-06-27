@@ -12,17 +12,29 @@ public class Player : MonoBehaviour
     [SerializeField] MeasuringDevice measuringDevice;
 
 
-
+    private int playerHP = 3;
     public int adjustmentRingValue = 0;
 
+    public bool canInteract = false;
 
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        GameInput.Instance.OnWeaponShoot += GameInput_OnWeaponShoot;
+    }
 
-    // Start is called before the first frame update
+    private void GameInput_OnWeaponShoot(object sender, System.EventArgs e)
+    {
+        rifle.Shoot();
+    }
 
+    public void DecreasePlayerHP()
+    {
+        playerHP--;
+    }
 }
 
