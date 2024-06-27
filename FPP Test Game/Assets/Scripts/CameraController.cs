@@ -21,5 +21,8 @@ public class CameraController : MonoBehaviour
         mouseMoveVector.y += Input.GetAxis("Mouse Y") * sensivity;
 
         transform.localRotation = Quaternion.Euler(-mouseMoveVector.y, mouseMoveVector.x, 0);
+
+        if (transform.localRotation.y > 70f)
+            transform.localRotation = Quaternion.Euler(70, mouseMoveVector.x, 0);
     }
 }

@@ -15,7 +15,8 @@ public class Wardrobe : BaseInteractiveObject
         Closed
     }
 
-    [SerializeField] private Transform rack;
+    [SerializeField] private RackController rackController;
+
     [SerializeField] private Transform openedPoint;
     [SerializeField] private Transform closedPoint;
 
@@ -33,6 +34,7 @@ public class Wardrobe : BaseInteractiveObject
     {
         wardrobeController = WardrobeController.Instance;
         state = WardrobeState.Closed;
+        rackController.TurnOffSlots();
     }
 
     private void Update()
@@ -104,15 +106,17 @@ public class Wardrobe : BaseInteractiveObject
 
     public IEnumerator OpenCoroutine()
     {
+        rackController.TurnOnSlots();
+
         while (state != WardrobeState.Opened)
         {
             state = WardrobeState.Opening;
-            rack.transform.position += -Vector3.left * Time.deltaTime;
+            rackController.transform.position += -Vector3.left * Time.deltaTime;
 
-            if (rack.transform.position.x > openedPoint.transform.position.x)
+            if (rackController.transform.position.x > openedPoint.transform.position.x)
             { 
                 state = WardrobeState.Opened;
-                rack.transform.position = new Vector3(openedPoint.transform.position.x, rack.transform.position.y, rack.transform.position.z);
+                rackController.transform.position = new Vector3(openedPoint.transform.position.x, rackController.transform.position.y, rackController.transform.position.z);
                 coroutine = null;
                 yield break;
             }
@@ -125,12 +129,14 @@ public class Wardrobe : BaseInteractiveObject
         while (state != WardrobeState.Closed)
         {
             state = WardrobeState.Closing;
-            rack.transform.position += Vector3.left * Time.deltaTime;
+            rackController.transform.position += Vector3.left * Time.deltaTime;
 
-            if (rack.transform.position.x < closedPoint.transform.position.x)
+            if (rackController.transform.position.x < closedPoint.transform.position.x)
             {
                 state = WardrobeState.Closed;
-                rack.transform.position = new Vector3(closedPoint.transform.position.x, rack.transform.position.y, rack.transform.position.z);
+                rackController.transform.position = new Vector3(closedPoint.transform.position.x, rackController.transform.position.y, rackController.transform.position.z);
+                rackController.TurnOffSlots();
+                
                 coroutine = null;
                 yield break;
             }

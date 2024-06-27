@@ -9,10 +9,12 @@ public class LaserDetector : MonoBehaviour
     public static LaserDetector Instance { get; private set; }
 
     [SerializeField] Transform rayStartPoint;
-    [SerializeField] LayerMask interactiveObjectlayerMask;
+
+    [SerializeField] LayerMask wardrobeLayerMask;
+    [SerializeField] LayerMask moveableObjectlayerMask;
     [SerializeField] LayerMask slotlayerMask;
 
-    public bool detectInteractiveObjects = true;
+    public bool detectMoveableObjects = true;
 
     private void Awake()
     {
@@ -21,24 +23,39 @@ public class LaserDetector : MonoBehaviour
 
     private void Update()
     {
-        if (detectInteractiveObjects)
-            DetectInteractiveObjects();
+        if (detectMoveableObjects)
+            DetectMoveableObjects();
 
         DetectAvatarSlots();
+        DetecWardrobesObjects();
     }
 
-    private void DetectInteractiveObjects()
+    private void DetecWardrobesObjects()
     {
-        Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out RaycastHit hitInfo, 20f, interactiveObjectlayerMask);
+        Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out RaycastHit hitInfo, 20f, wardrobeLayerMask);
 
         if (hitInfo.transform != null)
         {
             var hittedGameObject = hitInfo.transform;
-            Player.Instance.SetSelectedItem(hittedGameObject);
+            if (hittedGameObject.TryGetComponent<Wardrobe>(out Wardrobe wardrobe))
+            {
+                Player.Instance.AimingOnWardrobe(wardrobe);
+            }
+        }
+    }
+
+    private void DetectMoveableObjects()
+    {
+        Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out RaycastHit hitInfo, 20f, moveableObjectlayerMask);
+
+        if (hitInfo.transform != null)
+        {
+            var hittedGameObject = hitInfo.transform;
+            Player.Instance.AimedAtMoveableObject(hittedGameObject);
         }
         else
         {
-            Player.Instance.NotLookingOnAnyInteractiveObject();
+            Player.Instance.NotLookingOnAnyMoveableObject();
         }
     }
 

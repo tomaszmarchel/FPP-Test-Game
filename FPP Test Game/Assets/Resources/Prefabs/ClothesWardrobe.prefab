@@ -59,7 +59,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 3, y: 0.35, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4961994875868083191}
@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b644e424b76db9349ae4da24c7ea35df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f17c0f0a5e4984980de2e77b196277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rack: {fileID: 4961994875868083191}
+  rackController: {fileID: 4132911241471686420}
   openedPoint: {fileID: 5158471338312279247}
   closedPoint: {fileID: 978638437338047692}
   state: 0
@@ -480,7 +480,7 @@ MonoBehaviour:
   moveableObjectInSlot: {fileID: 0}
   spawnPoint: {fileID: 1650259047664719599}
   slotType: 0
-  originalMoveableObejct: {fileID: 0}
+  originalMoveableObejct: {fileID: 8282582197062918457, guid: 673ba972a2cb21448b3715874dff5662, type: 3}
 --- !u!1 &6886028176761391822
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +680,7 @@ MonoBehaviour:
   moveableObjectInSlot: {fileID: 0}
   spawnPoint: {fileID: 5461539534431728613}
   slotType: 3
-  originalMoveableObejct: {fileID: 0}
+  originalMoveableObejct: {fileID: 4394753462543886956, guid: 25d0aed135463a0439d050d082fb8ccd, type: 3}
 --- !u!1 &7184878402649777012
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
   moveableObjectInSlot: {fileID: 0}
   spawnPoint: {fileID: 3747898504413868981}
   slotType: 2
-  originalMoveableObejct: {fileID: 0}
+  originalMoveableObejct: {fileID: -3067980514047967362, guid: c4135f14dc6dca242a56211f4b572c1c, type: 3}
 --- !u!1 &8966452297708186353
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,5 +910,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveableObjectInSlot: {fileID: 0}
   spawnPoint: {fileID: 414489812673153524}
-  slotType: 3
-  originalMoveableObejct: {fileID: 0}
+  slotType: 4
+  originalMoveableObejct: {fileID: 7052359442683497474, guid: 60b150540e74ce44e8e051bc42ff44b6, type: 3}

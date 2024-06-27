@@ -14,7 +14,7 @@ public static class MoveableObjectsTypes
         Kevlar,
         Belt,
         GasMask,
-        Weapons,
-        MeasuringDevice
+        Weapon,
+        AdjustmentDevice
     }
 }

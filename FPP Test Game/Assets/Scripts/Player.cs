@@ -14,6 +14,8 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     private MoveableObject holdingObject;
     [SerializeField] private Transform holdItemPoint;
 
+    public int adjustmentRingValue = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -21,8 +23,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
 
     private void Start()
     {
-        GameInput.Instance.OnMouseButtonUp += GameInput_OnMouseButtonUp;
-
+        GameInput.Instance.OnItemDrop += GameInput_OnMouseButtonUp;
     }
 
     private void GameInput_OnMouseButtonUp(object sender, EventArgs e)
@@ -43,7 +44,9 @@ public class Player : MonoBehaviour, IMoveableObjectParent
                     }
                 }
                 else
+                {
                     holdingObject.DestroySelf();
+                }
             }
             else
             {
@@ -52,13 +55,8 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         }
     }
 
-    public void SetSelectedItem(Transform selectedItem)
+    public void AimedAtMoveableObject(Transform selectedItem)
     {
-        if (selectedItem.TryGetComponent<Wardrobe>(out Wardrobe selectedWardrobe))
-        {
-            WardrobeInteraction(selectedWardrobe);
-        }
-
         if (selectedItem.TryGetComponent<MoveableObject>(out MoveableObject moveableObject))
         {
             MoveableItemAimedAt(moveableObject);
@@ -89,7 +87,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
         }
     }
 
-    public void NotLookingOnAnyInteractiveObject()
+    public void NotLookingOnAnyMoveableObject()
     {
         if (aimedMoveableObject != null)
         {
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     public void SetMoveableObject(MoveableObject moveableObject)
     {
         this.holdingObject = moveableObject;
-        LaserDetector.Instance.detectInteractiveObjects = false;
+        LaserDetector.Instance.detectMoveableObjects = false;
     }
 
     public MoveableObject GetMoveableObject()
@@ -143,6 +141,7 @@ public class Player : MonoBehaviour, IMoveableObjectParent
     public void ClearMoveableObject()
     {
         holdingObject = null;
+        LaserDetector.Instance.detectMoveableObjects = true;
     }
 
     public bool HasSelectedMoveableObject()

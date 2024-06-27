@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6676057133046002939}
   - component: {fileID: 1373711814207332137}
   - component: {fileID: 6121437595332940867}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Gloves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
