@@ -21,8 +21,7 @@ public class AvatarSlotChecker : MonoBehaviour
     private void GameInput_OnItemDrop(object sender, System.EventArgs e)
     {
         if(AreAllItemsEquiped())
-            FirstStageManager.Instance.GoToSecondStage();
-
+            GameManager.Instance.GoToSecondStage();
     }
 
     public bool AreAllItemsEquiped()

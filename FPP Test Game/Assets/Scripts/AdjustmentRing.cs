@@ -21,7 +21,7 @@ public class AdjustmentRing : MonoBehaviour
 
     private void GameInput_OnIncreaseRing(object sender, System.EventArgs e)
     {
-        if (Player.Instance.adjustmentRingValue > maxRingValueMinusOne) 
+        if (Player.Instance.adjustmentRingValue > maxRingValueMinusOne)
             Player.Instance.adjustmentRingValue = minRingValue;
         else
             Player.Instance.adjustmentRingValue++;

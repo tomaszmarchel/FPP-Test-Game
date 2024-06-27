@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,7 @@ public static class Loader
     {
         Loader.targetScene = scene;
 
-        SceneManager.LoadScene(targetScene.ToString());
+        GameManager.Instance.GoToSecondStage();
 
     }
 }

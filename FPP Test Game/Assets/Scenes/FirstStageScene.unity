@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9dcca95924f374e87c9d93f6c034e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a: 0
 --- !u!4 &1381239603
 Transform:
   m_ObjectHideFlags: 0
@@ -1371,7 +1372,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1800594710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e99b6b65b9560b4e853a3f04911eb3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 35b729f699f1e304ab78280e5ef736e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   holdItemPoint: {fileID: 354546497}

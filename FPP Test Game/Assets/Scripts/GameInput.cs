@@ -14,28 +14,47 @@ public class GameInput : MonoBehaviour
 
     public bool isMouseButtonDown = false;
 
+    InputActions inputActions;
+
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
+
+        inputActions = new InputActions();
+        inputActions.Player.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
-            isMouseButtonDown = true;
+        if (GameManager.Instance.gameStage == GameManager.GameStage.FirstStage)
+        {
+            if (Input.GetMouseButton(0))
+                isMouseButtonDown = true;
+            else
+                isMouseButtonDown = false;
+
+            if (Input.GetMouseButtonUp(0))
+                OnItemDrop?.Invoke(this, EventArgs.Empty);
+
+            if (Input.GetKey(KeyCode.P))
+                GameManager.Instance.GoToSecondStage();
+        }
         else
-            isMouseButtonDown = false;
-    
-        if (Input.GetMouseButtonUp(0))
-            OnItemDrop(this, EventArgs.Empty);
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                OnDecreaseRing?.Invoke(this, EventArgs.Empty);
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            OnDecreaseRing(this, EventArgs.Empty);
+            if (Input.GetKeyDown(KeyCode.E))
+                OnIncreaseRing?.Invoke(this, EventArgs.Empty);
+        }
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
-            OnIncreaseRing(this, EventArgs.Empty);
-
+    public Vector2 GetMovementVectorNormalized()
+    {
+        Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
+        return inputVector;
     }
 }

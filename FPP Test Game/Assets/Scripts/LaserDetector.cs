@@ -39,7 +39,7 @@ public class LaserDetector : MonoBehaviour
             var hittedGameObject = hitInfo.transform;
             if (hittedGameObject.TryGetComponent<Wardrobe>(out Wardrobe wardrobe))
             {
-                Player.Instance.AimingOnWardrobe(wardrobe);
+                FirstStagePlayer.Instance.AimingOnWardrobe(wardrobe);
             }
         }
     }
@@ -51,11 +51,11 @@ public class LaserDetector : MonoBehaviour
         if (hitInfo.transform != null)
         {
             var hittedGameObject = hitInfo.transform;
-            Player.Instance.AimedAtMoveableObject(hittedGameObject);
+            FirstStagePlayer.Instance.AimedAtMoveableObject(hittedGameObject);
         }
         else
         {
-            Player.Instance.NotLookingOnAnyMoveableObject();
+            FirstStagePlayer.Instance.NotLookingOnAnyMoveableObject();
         }
     }
 
@@ -68,12 +68,12 @@ public class LaserDetector : MonoBehaviour
             var hittedSlot = hitInfo.transform;
             if (hittedSlot.TryGetComponent<MoveableAvatarSlot>(out MoveableAvatarSlot moveableAvatarSlot))
             {
-                Player.Instance.AimingOnSlot(moveableAvatarSlot);
+                FirstStagePlayer.Instance.AimingOnSlot(moveableAvatarSlot);
             }
         }
         else
         {
-            Player.Instance.NotLookingOnAnySlot();
+            FirstStagePlayer.Instance.NotLookingOnAnySlot();
         }
     }
 }

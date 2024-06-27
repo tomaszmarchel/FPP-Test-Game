@@ -51,7 +51,7 @@ public class MoveableObject : MonoBehaviour
 
             if (state == OutlineState.Seleceted)
             {
-                SetMoveableObjectParent(Player.Instance);
+                SetMoveableObjectParent(FirstStagePlayer.Instance);
             }
 
             ShowOutline();
