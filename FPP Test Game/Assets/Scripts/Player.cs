@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     [SerializeField] GameInput gameInput;
+    [SerializeField] Rifle rifle;
+    [SerializeField] MeasuringDevice measuringDevice;
+
+
 
     public int adjustmentRingValue = 0;
 
@@ -16,6 +20,8 @@ public class Player : MonoBehaviour
     {
         Instance = this;
     }
+
+
     // Start is called before the first frame update
 
 }

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(Loader.Scene.SecondStageScene.ToString()));
+        gameStage = GameStage.SecondStage;
         SceneManager.UnloadSceneAsync(Loader.Scene.FirstStageScene.ToString());
     }
 }

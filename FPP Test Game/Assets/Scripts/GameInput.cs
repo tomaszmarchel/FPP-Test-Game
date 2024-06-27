@@ -12,6 +12,9 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnDecreaseRing;
     public event EventHandler OnIncreaseRing;
 
+    public event EventHandler OnTakeMeasurement;
+    public event EventHandler OnWeaponShoot;
+
     public bool isMouseButtonDown = false;
 
     InputActions inputActions;
@@ -38,7 +41,7 @@ public class GameInput : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
                 OnItemDrop?.Invoke(this, EventArgs.Empty);
 
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
                 GameManager.Instance.GoToSecondStage();
         }
         else
@@ -48,13 +51,13 @@ public class GameInput : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
                 OnIncreaseRing?.Invoke(this, EventArgs.Empty);
-        }
-    }
 
-    public Vector2 GetMovementVectorNormalized()
-    {
-        Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
-        inputVector = inputVector.normalized;
-        return inputVector;
+            if (Input.GetKeyDown(KeyCode.R))
+                OnTakeMeasurement?.Invoke(this, EventArgs.Empty);
+
+            if (Input.GetMouseButtonDown(0))
+                OnWeaponShoot?.Invoke(this, EventArgs.Empty);
+
+        }
     }
 }

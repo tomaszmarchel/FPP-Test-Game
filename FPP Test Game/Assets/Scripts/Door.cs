@@ -17,4 +17,15 @@ public class Door : MonoBehaviour
     {
         
     }
+
+    public int GetDoorValue()
+    {
+        Debug.Log(doorValue);
+        return doorValue;
+    }
+
+    public void NeutralizeDoor()
+    {
+        doorValue = 0;
+    }
 }

@@ -10,7 +10,7 @@ public class AdjustmentRing : MonoBehaviour
     private int minRingValuePlusOne = 1;
     private int maxRingValueMinusOne = 8;
 
-
+    private int ringValue = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,17 +21,22 @@ public class AdjustmentRing : MonoBehaviour
 
     private void GameInput_OnIncreaseRing(object sender, System.EventArgs e)
     {
-        if (Player.Instance.adjustmentRingValue > maxRingValueMinusOne)
-            Player.Instance.adjustmentRingValue = minRingValue;
+        if (ringValue > maxRingValueMinusOne)
+            ringValue = minRingValue;
         else
-            Player.Instance.adjustmentRingValue++;
+            ringValue++;
     }
 
     private void GameInput_OnDecreaseRing(object sender, System.EventArgs e)
     {
-        if (Player.Instance.adjustmentRingValue < minRingValuePlusOne)
-            Player.Instance.adjustmentRingValue = maxRingValue;
+        if (ringValue < minRingValuePlusOne)
+            ringValue = maxRingValue;
         else
-            Player.Instance.adjustmentRingValue--;
+            ringValue--;
+    }
+
+    public int GetRingValue()
+    {
+        return ringValue;
     }
 }
