@@ -10,6 +10,8 @@ public class MeasuringDevice : MonoBehaviour
 
     [SerializeField] MeasuringDeviceVisual measuringDeviceVisual;
 
+    public bool canDoMeasurement = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,8 @@ public class MeasuringDevice : MonoBehaviour
 
     private void GameInput_OnTakeMeasurement(object sender, System.EventArgs e)
     {
-        Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 6f, doorLayerMask);
+
+            Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 6f, doorLayerMask);
         if (hitInfo.transform != null)
         {
             var hittedSlot = hitInfo.transform;
@@ -35,6 +38,7 @@ public class MeasuringDevice : MonoBehaviour
                         door.doorCheckedAfterNeutralization = true;
                 }
             }
+
         }
     }
 

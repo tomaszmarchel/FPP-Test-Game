@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Rifle : MonoBehaviour
@@ -40,24 +36,8 @@ public class Rifle : MonoBehaviour
             var hittedSlot = wallHitInfo.transform;
             if (hittedSlot.TryGetComponent<Wall>(out Wall wall))
             {
-                OnWallHit(wall);
+                wall.OnHit(adjustmentRing.GetRingValue());
             }
-        }
-    }
-
-    private void OnWallHit(Wall wall)
-    {
-        var adjustmentRingValue = adjustmentRing.GetRingValue();
-        var wallValue = wall.GetWallRingValue();
-
-        if (adjustmentRingValue == wallValue)
-        {
-            wall.WallOnHit();
-        }
-        else
-        {
-            GameStatistics.badRingValueInRoomError++;
-            wall.IncorrectWallMark();
         }
     }
 
@@ -71,7 +51,7 @@ public class Rifle : MonoBehaviour
 
             if (adjustmentRingValue == doorValue)
             {
-                if (door.doorFirstCheck && door.doorCheckedAfterNeutralization)
+                if (door.doorFirstCheck)
                     door.NeutralizeDoor();
             }
             else if (adjustmentRingValue > doorValue)
@@ -82,46 +62,6 @@ public class Rifle : MonoBehaviour
             {
                 GameStatistics.tooLowRingValueDoorsError++;
             }
-
-
-            /*
-            if (!door.doorFirstCheck)
-            {
-                if (adjustmentRingValue > doorValue)
-                {
-                    GameStatistics.tooHighRingValueDoorsError++;
-                }
-                else if (adjustmentRingValue < doorValue)
-                {
-                    GameStatistics.tooLowRingValueDoorsError++;
-                }
-
-                //door.DestroyDoor();
-            }
-           // else if (doorValue == 0)
-            //{
-           //     door.DestroyDoor();
-           // }
-            else
-            {
-                if (adjustmentRingValue == doorValue)
-                {
-                    door.NeutralizeDoor();
-                }
-                else
-                {
-                    //door.DestroyDoor();
-
-                    if (adjustmentRingValue > doorValue)
-                    {
-                        GameStatistics.tooHighRingValueDoorsError++;
-                    }
-                    else if (adjustmentRingValue < doorValue)
-                    {
-                        GameStatistics.tooLowRingValueDoorsError++;
-                    }
-                }
-            }*/
         }
     }
 

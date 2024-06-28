@@ -32,8 +32,6 @@ public class GameInput : MonoBehaviour
 
         inputActions = new InputActions();
         inputActions.Player.Enable();
-
-        player = Player.Instance;
     }
 
     // Update is called once per frame
@@ -63,9 +61,8 @@ public class GameInput : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
                 OnTakeMeasurement?.Invoke(this, EventArgs.Empty);
 
-            if (player.canInteract)
-                if (Input.GetKeyDown(KeyCode.E))
-                    OnInteraction?.Invoke(this, EventArgs.Empty);
+            if (Input.GetKeyDown(KeyCode.E))
+                OnInteraction?.Invoke(this, EventArgs.Empty);
 
             if (Input.GetMouseButtonDown(0))
                 OnWeaponShoot?.Invoke(this, EventArgs.Empty);

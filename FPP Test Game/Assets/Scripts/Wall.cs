@@ -8,40 +8,57 @@ public class Wall : MonoBehaviour
     [SerializeField] WallVisual wallVisual;
     private int wallRingValue = 0;
 
-    public void WallOnHit()
-    {
-        IsWallInWallsToHit();
-    }
 
-    private void IsWallInWallsToHit()
+    public void OnHit(int ringValue)
     {
-        if (owner.GetWallsToHitList().Contains(this))
+        var adjustmentRingValue = ringValue;
+
+        if (IsWallInWallsToHit())
         {
-            CorrectWallMark();
+            if (adjustmentRingValue == wallRingValue)
+            {
+                CorrectHit();
+            }
+            else
+            {
+                WrongRingValueHit();
+            }
         }
         else
         {
-            IncorrectWallMark();
+            OnNextShootHit();
         }
     }
 
-    public virtual void CorrectWallMark()
+    private bool IsWallInWallsToHit()
     {
-        wallVisual.MarkWallVisualization(true);
-        owner.DeleteWallFromList(this);
-
-        owner.RoomFinishCheck();
+        if (owner.GetWallsToHitList().Contains(this))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public virtual void IncorrectWallMark()
+    public virtual void CorrectHit()
+    {
+        owner.DeleteWallFromList(this);
+        owner.RoomFinishCheck();
+        wallVisual.MarkWallVisualization(true);
+    }
+
+    public virtual void OnNextShootHit()
     {
         wallVisual.MarkWallVisualization(false);
         GameStatistics.moreThanOneShootToWallError++;
     }
 
-    public int GetWallRingValue()
+    public virtual void WrongRingValueHit()
     {
-        return wallRingValue;
+        wallVisual.MarkWallVisualization(false);
+        GameStatistics.wrongRingValueInRoomError++;
     }
 
     public WallVisual GetWallVisual()

@@ -26,11 +26,10 @@ public class UIManager : MonoBehaviour
 
     public void HideInteractionText()
     {
-        if (interactionText == null)
+        if (interactionText != null)
         {
-            Debug.Log("interaction text is null");
+            interactionText.gameObject.SetActive(false);
         }
-        interactionText.gameObject.SetActive(false);
     }
 
     public void DecreasePlayerHPUI()

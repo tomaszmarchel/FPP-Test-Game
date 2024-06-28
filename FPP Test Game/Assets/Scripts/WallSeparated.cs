@@ -7,18 +7,24 @@ public class WallSeparated : Wall
 {
     [SerializeField] Wall secondWallPart;
 
-    public override void CorrectWallMark()
+    public override void CorrectHit()
     {
-        base.CorrectWallMark();
+        base.CorrectHit();
 
         secondWallPart.GetWallVisual().MarkWallVisualization(true);
         owner.DeleteWallFromList(secondWallPart);
     }
 
-    public override void IncorrectWallMark()
+    public override void OnNextShootHit()
     {
-        base.IncorrectWallMark();
+        base.OnNextShootHit();
 
+        secondWallPart.GetWallVisual().MarkWallVisualization(false);
+    }
+
+    public override void WrongRingValueHit()
+    {
+        base.WrongRingValueHit();
         secondWallPart.GetWallVisual().MarkWallVisualization(false);
     }
 }

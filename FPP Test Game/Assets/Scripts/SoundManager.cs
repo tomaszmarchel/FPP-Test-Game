@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         Player.Instance.OnRifleShootEvent += Player_OnRifleShootEvent;
+
         GameInput.Instance.OnTakeMeasurement += GameInput_OnTakeMeasurement;
         GameInput.Instance.OnIncreaseRing += GameInput_OnIncreaseRing;
         GameInput.Instance.OnDecreaseRing += GameInput_OnDecreaseRing;

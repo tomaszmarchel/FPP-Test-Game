@@ -27,7 +27,7 @@ public class UISummaryController : MonoBehaviour
         tooHighRingSettingText.text += GameStatistics.tooHighRingValueDoorsError.ToString();
         tooSmallRingSettingText.text += GameStatistics.tooLowRingValueDoorsError.ToString();
 
-        wrongRingSettingInRoomText.text += GameStatistics.badRingValueInRoomError.ToString();
+        wrongRingSettingInRoomText.text += GameStatistics.wrongRingValueInRoomError.ToString();
         skippedWallsText.text += GameStatistics.missedWallsInRoomError.ToString();
         moreThanOneWallHittedText.text += GameStatistics.moreThanOneShootToWallError.ToString();
     }

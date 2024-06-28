@@ -22,7 +22,7 @@ public static class GameStatistics
     public static int tooHighRingValueDoorsError = 0;
     public static int tooLowRingValueDoorsError = 0;
 
-    public static int badRingValueInRoomError = 0;
+    public static int wrongRingValueInRoomError = 0;
     public static int missedWallsInRoomError = 0;
     public static int moreThanOneShootToWallError = 0;
 }

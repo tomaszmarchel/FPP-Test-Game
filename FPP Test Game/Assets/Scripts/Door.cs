@@ -30,13 +30,9 @@ public class Door : MonoBehaviour
     {
         if (!doorFirstCheck || !doorNeutralized || !doorCheckedAfterNeutralization || doorValue != 0)
             DestroyDoor();
-        else
+
+        if (doorNeutralized && doorCheckedAfterNeutralization && doorValue == 0)
             OpenDoor(true);
-        /*
-        if (doorValue == 0)
-        {
-            OpenDoor(true);
-        }*/
     }
 
     private void OpenDoor(bool againMeasurmentDone)

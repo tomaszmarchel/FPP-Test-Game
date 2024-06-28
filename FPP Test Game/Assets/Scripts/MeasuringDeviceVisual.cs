@@ -5,12 +5,17 @@ using UnityEngine;
 public class MeasuringDeviceVisual : MonoBehaviour
 {
     [SerializeField] private GameObject[] visualNumbers;
-    private float visibleTime = 2f;
+    private MeasuringDevice owner;
+
+    private float visibleTime = 1.5f;
 
     private Coroutine coroutine;
 
 
-    // Start is called before the first frame update
+    public void Awake()
+    {
+        owner = GetComponentInParent<MeasuringDevice>();
+    }
 
     private void CoroutineCheck()
     {
@@ -23,21 +28,24 @@ public class MeasuringDeviceVisual : MonoBehaviour
 
     private IEnumerator TurnOnVisualValues(int value)
     {
-        visibleTime = 2f;
+        visibleTime = 1.5f;
         while (visibleTime > 0)
         {
+            owner.canDoMeasurement = false;
             visibleTime -= Time.deltaTime;
             visualNumbers[value].gameObject.SetActive(true);
             yield return null;
         }
 
         visualNumbers[value].gameObject.SetActive(false);
+        coroutine = null;
         yield break;
     }
 
     public void SetVisualNumber(int value)
     {
-        CoroutineCheck();
-        coroutine = StartCoroutine(TurnOnVisualValues(value));
+        //CoroutineCheck();
+        if (coroutine == null)
+            coroutine = StartCoroutine(TurnOnVisualValues(value));
     }
 }
