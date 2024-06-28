@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 5436779768069077211}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,8 +443,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.8
+  m_Radius: 0.4
+  m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &5066613810471939854
@@ -505,7 +505,10 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   rifle: {fileID: 9095554567682148055}
   measuringDevice: {fileID: 3137481070507007771}
+  onInteractionDoor: {fileID: 0}
+  playerHP: 3
   adjustmentRingValue: 0
+  canInteract: 0
 --- !u!1 &3862532114618219888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1044,9 @@ MonoBehaviour:
   doorLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &4956995472844134280 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2408698855545547561, guid: df65cc90882029249b0898f91229b2db, type: 3}
