@@ -23,6 +23,7 @@ public class MeasuringDeviceVisual : MonoBehaviour
 
     private IEnumerator TurnOnVisualValues(int value)
     {
+        visibleTime = 2f;
         while (visibleTime > 0)
         {
             visibleTime -= Time.deltaTime;
@@ -36,7 +37,6 @@ public class MeasuringDeviceVisual : MonoBehaviour
 
     public void SetVisualNumber(int value)
     {
-        visibleTime = 2f;
         CoroutineCheck();
         coroutine = StartCoroutine(TurnOnVisualValues(value));
     }

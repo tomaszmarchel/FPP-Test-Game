@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensivity: 2
-  multiplier: 2
+  multiplier: 3
   xSens: 200
   ySens: 200
   orientation: {fileID: 0}

@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+    private RoomsController roomsController;
+
+    public static float secondStageStartTime = 0;
     public enum GameStage
     {
         FirstStage,
@@ -15,16 +17,22 @@ public class GameManager : MonoBehaviour
     }
     public GameStage gameStage = GameStage.FirstStage;
 
-    // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
+
+        // TO TEST ON SECOND STAGE
+        FindRoomControllerRef();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameInput.Instance.OnGameOverExit += GameInput_OnGameOverExit;
+    }
+
+    private void GameInput_OnGameOverExit(object sender, System.EventArgs e)
+    {
+        Application.Quit();
     }
 
     public void GoToSecondStage()
@@ -34,7 +42,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
-
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(Loader.Scene.SecondStageScene.ToString(), LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
@@ -45,5 +52,33 @@ public class GameManager : MonoBehaviour
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(Loader.Scene.SecondStageScene.ToString()));
         gameStage = GameStage.SecondStage;
         SceneManager.UnloadSceneAsync(Loader.Scene.FirstStageScene.ToString());
+
+        FindRoomControllerRef();
+        secondStageStartTime = Time.timeSinceLevelLoad;
+    
+    }
+
+    private void FindRoomControllerRef()
+    {
+        roomsController = GameObject.FindObjectOfType<RoomsController>().GetComponent<RoomsController>();
+    }
+
+    public void GameOver()
+    {
+        CalculateMissedWalls();
+
+        gameStage = GameStage.ThirdStage;
+        ShowStatistics();
+        Time.timeScale = 0.0f;
+    }
+
+    private void CalculateMissedWalls()
+    {
+        GameStatistics.missedWallsInRoomError = roomsController.GetMissedWalls();
+    }
+
+    private void ShowStatistics()
+    {
+        UIManager.Instance.ShowStatistics();
     }
 }

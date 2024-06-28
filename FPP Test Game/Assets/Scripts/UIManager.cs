@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] TMP_Text interactionText;
+    [SerializeField] UIPlayerHPController UIPlayerHPController;
+    [SerializeField] UISummaryController UISummaryController;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,13 +26,22 @@ public class UIManager : MonoBehaviour
 
     public void HideInteractionText()
     {
+        if (interactionText == null)
+        {
+            Debug.Log("interaction text is null");
+        }
         interactionText.gameObject.SetActive(false);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void DecreasePlayerHPUI()
     {
-        
+        UIPlayerHPController.DecreasePlayerHP();
+    }
+
+    public void ShowStatistics()
+    {
+        UISummaryController.gameObject.SetActive(true);
+
+        UISummaryController.UpdateStatistics();
     }
 }

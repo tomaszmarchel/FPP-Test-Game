@@ -19,8 +19,7 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            UIManager.Instance.ShowInteractionText();
-            Player.Instance.canInteract = true;
+            PlayerAtTheDoor();
         }
     }
 
@@ -28,14 +27,26 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            UIManager.Instance.HideInteractionText();
-            Player.Instance.canInteract = true;
+            PlayerOutsideTheDoor();
         }
     }
 
     private void OnDestroy()
     {
-        // Needed because UI will not disapear
+        PlayerOutsideTheDoor();
+    }
+
+    private void PlayerAtTheDoor()
+    {
+        UIManager.Instance.ShowInteractionText();
+        Player.Instance.canInteract = true;
+        Player.Instance.onInteractionDoor = owner;
+    }
+
+    private void PlayerOutsideTheDoor()
+    {
         UIManager.Instance.HideInteractionText();
+        Player.Instance.canInteract = false;
+        Player.Instance.onInteractionDoor = null;
     }
 }

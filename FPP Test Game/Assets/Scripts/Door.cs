@@ -7,55 +7,72 @@ public class Door : MonoBehaviour
     [SerializeField] int doorValue;
 
     [SerializeField] BoxCollider doorTrigger;
+    [SerializeField] Transform doorPivotPoint;
 
     [SerializeField] ParticleSystem fireParticle;
     [SerializeField] Transform firePoint;
 
+    [SerializeField] Room myRoom;
+
     public bool doorDestroyded = false;
+
+    public bool doorFirstCheck = false;
     public bool doorNeutralized = false;
     public bool doorCheckedAfterNeutralization = false;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         doorValue = Random.Range(1, 9);
-        GameInput.Instance.OnInteraction += GameInput_OnInteraction;
     }
 
-    private void GameInput_OnInteraction(object sender, System.EventArgs e)
+    public void OnInteraction()
     {
-        if (!doorNeutralized || !doorCheckedAfterNeutralization || doorValue > 0)
+        if (!doorFirstCheck || !doorNeutralized || !doorCheckedAfterNeutralization || doorValue > 0)
             DestroyDoor();
-        
-        if (doorNeutralized && doorCheckedAfterNeutralization && doorValue == 0)
-            OpenDoor();
+
+        if (doorNeutralized && doorValue == 0)
+        {
+            if (!doorCheckedAfterNeutralization)
+            {
+                GameStatistics.noMeasurementError++;
+                OpenDoor(false);
+            }
+            else
+                OpenDoor(true);
+        }
     }
 
-    private void OpenDoor()
+    private void OpenDoor(bool againMeasurmentDone)
     {
-        GameStatistics.correctNeutralizedDoors++;
-        Destroy(gameObject);
+        if (againMeasurmentDone)
+            GameStatistics.correctNeutralizedDoors++;
+
+        transform.Rotate(0, 90f, 0, Space.Self);
+        if (doorTrigger != null)
+            Destroy(doorTrigger.gameObject);
     }
 
     public void DestroyDoor()
     {
         doorDestroyded = true;
-        Destroy(doorTrigger.gameObject);
 
-        UIManager.Instance.HideInteractionText();
-        GameStatistics.incorrentNeutralizedDoors++;
+        if (!doorFirstCheck)
+            GameStatistics.noMeasurementError++;
+
+        GameStatistics.noMeasurementError++;
+
+        if (doorTrigger != null)
+            Destroy(doorTrigger.gameObject);
+
+        Player.Instance.DecreasePlayerHP();
         Instantiate(fireParticle, firePoint);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        myRoom.RoomDestroyded();
     }
 
     public int GetDoorValue()
     {
-        Debug.Log(doorValue);
         return doorValue;
     }
 

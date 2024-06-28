@@ -17,6 +17,8 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnInteraction;
 
+    public event EventHandler OnGameOverExit;
+
     public bool isMouseButtonDown = false;
     private Player player;
 
@@ -50,7 +52,7 @@ public class GameInput : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.P))
                 GameManager.Instance.GoToSecondStage();
         }
-        else
+        else if (GameManager.Instance.gameStage == GameManager.GameStage.SecondStage)
         {
             if (Input.GetKeyDown(KeyCode.Z))
                 OnDecreaseRing?.Invoke(this, EventArgs.Empty);
@@ -67,7 +69,11 @@ public class GameInput : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
                 OnWeaponShoot?.Invoke(this, EventArgs.Empty);
-
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                OnGameOverExit?.Invoke(this, EventArgs.Empty);
         }
     }
 }

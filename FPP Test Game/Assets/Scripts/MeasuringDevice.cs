@@ -13,7 +13,7 @@ public class MeasuringDevice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameInput.Instance.OnTakeMeasurement += GameInput_OnTakeMeasurement;    
+        GameInput.Instance.OnTakeMeasurement += GameInput_OnTakeMeasurement;
     }
 
     private void GameInput_OnTakeMeasurement(object sender, System.EventArgs e)
@@ -29,19 +29,14 @@ public class MeasuringDevice : MonoBehaviour
                     GetDoorValue(door);
                     measuringDeviceVisual.SetVisualNumber(GetDoorValue(door));
 
+                    door.doorFirstCheck = true;
+
                     if (door.doorNeutralized)
                         door.doorCheckedAfterNeutralization = true;
                 }
             }
         }
-        else
-        {
-
-        }
-
-
     }
-
 
     private int GetDoorValue(Door door)
     {

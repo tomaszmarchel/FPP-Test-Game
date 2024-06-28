@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Rifle : MonoBehaviour
@@ -8,6 +10,7 @@ public class Rifle : MonoBehaviour
     [SerializeField] Transform shootStartPoint;
 
     [SerializeField] LayerMask doorLayerMask;
+    [SerializeField] LayerMask wallLayerMask;
 
     private Player owner;
 
@@ -19,47 +22,93 @@ public class Rifle : MonoBehaviour
 
     public void Shoot()
     {
-        // Add visuals 
+        owner.OnRifleShoot();
 
 
-        Physics.Raycast(shootStartPoint.position, shootStartPoint.forward, out RaycastHit hitInfo, 4f, doorLayerMask);
-        if (hitInfo.transform != null)
+        // CAN ADD PARTICLES 
+
+
+        Physics.Raycast(shootStartPoint.position, shootStartPoint.forward, out RaycastHit doorHitInfo, 20f, doorLayerMask);
+        if (doorHitInfo.transform != null)
         {
-            var hittedSlot = hitInfo.transform;
-            if (hittedSlot.TryGetComponent<Door>(out Door door))
-            {
-                var adjustmentRingValue = adjustmentRing.GetRingValue();
-                var doorValue = door.GetDoorValue();
+            DoorShoot(doorHitInfo);
+        }
 
-                if (doorValue == 0)
+        Physics.Raycast(shootStartPoint.position, shootStartPoint.forward, out RaycastHit wallHitInfo, 20f);
+        if (wallHitInfo.transform != null)
+        {
+            var hittedSlot = wallHitInfo.transform;
+            if (hittedSlot.TryGetComponent<Wall>(out Wall wall))
+            {
+                RoomWallShoot(wall);
+            }
+        }
+    }
+
+    private void RoomWallShoot(Wall wall)
+    {
+        var adjustmentRingValue = adjustmentRing.GetRingValue();
+        var wallValue = wall.GetWallRingValue();
+
+        if (adjustmentRingValue == wallValue)
+        {
+            wall.WallOnHit();
+        }
+        else
+        {
+            GameStatistics.badRingValueInRoomError++;
+            wall.IncorrectWallMark();
+        }
+    }
+
+    private void DoorShoot(RaycastHit raycastHit)
+    {
+        var hittedSlot = raycastHit.transform;
+        if (hittedSlot.TryGetComponent<Door>(out Door door))
+        {
+            var adjustmentRingValue = adjustmentRing.GetRingValue();
+            var doorValue = door.GetDoorValue();
+
+            if (!door.doorFirstCheck)
+            {
+                if (adjustmentRingValue > doorValue)
                 {
-                    door.DestroyDoor();
-                    owner.DecreasePlayerHP();
+                    GameStatistics.tooHighRingValueDoorsError++;
+                }
+                else if (adjustmentRingValue < doorValue)
+                {
+                    GameStatistics.tooLowRingValueDoorsError++;
+                }
+
+                door.DestroyDoor();
+            }
+            else if (doorValue == 0)
+            {
+                door.DestroyDoor();
+            }
+            else
+            {
+                if (adjustmentRingValue == doorValue)
+                {
+                    door.NeutralizeDoor();
                 }
                 else
                 {
-                    if (adjustmentRingValue == doorValue)
-                    {
-                        door.NeutralizeDoor();
-                    }
-                    else
-                    {
-                        door.DestroyDoor();
-                        owner.DecreasePlayerHP();
+                    door.DestroyDoor();
 
-                        if (adjustmentRingValue > doorValue)
-                        {
-                            GameStatistics.higherRingValue++;
-                        }
-                        else if (adjustmentRingValue < doorValue)
-                        {
-                            GameStatistics.lowerRingValue++;
-                        }
+                    if (adjustmentRingValue > doorValue)
+                    {
+                        GameStatistics.tooHighRingValueDoorsError++;
+                    }
+                    else if (adjustmentRingValue < doorValue)
+                    {
+                        GameStatistics.tooLowRingValueDoorsError++;
                     }
                 }
             }
         }
     }
+
 
 
     public int GetAdjustmentRingValue()
