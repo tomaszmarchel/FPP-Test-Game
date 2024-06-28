@@ -18,7 +18,7 @@ public class UISummaryController : MonoBehaviour
 
     public void UpdateStatistics()
     {
-        totalTimeText.text += Time.timeSinceLevelLoad - GameManager.secondStageStartTime;
+        totalTimeText.text += Mathf.Ceil(Time.timeSinceLevelLoad - GameManager.secondStageStartTime);
         correctNeutralizedDoorsText.text += GameStatistics.correctNeutralizedDoors.ToString();
         correctNeutralizedRoomsText.text += GameStatistics.correctNeutralizedRooms.ToString();
 

@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 1
+  isGrounded: 0
 --- !u!1 &2299629504583243904
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +952,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 37040893178210260}
     m_Modifications:
+    - target: {fileID: 1807105832645620667, guid: df65cc90882029249b0898f91229b2db, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6627128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807105832645620667, guid: df65cc90882029249b0898f91229b2db, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807105832645620667, guid: df65cc90882029249b0898f91229b2db, type: 3}
+      propertyPath: m_Center.x
+      value: -0.1079327
+      objectReference: {fileID: 0}
     - target: {fileID: 6938712016339395934, guid: df65cc90882029249b0898f91229b2db, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2

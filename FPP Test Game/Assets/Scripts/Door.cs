@@ -28,19 +28,15 @@ public class Door : MonoBehaviour
 
     public void OnInteraction()
     {
-        if (!doorFirstCheck || !doorNeutralized || !doorCheckedAfterNeutralization || doorValue > 0)
+        if (!doorFirstCheck || !doorNeutralized || !doorCheckedAfterNeutralization || doorValue != 0)
             DestroyDoor();
-
-        if (doorNeutralized && doorValue == 0)
+        else
+            OpenDoor(true);
+        /*
+        if (doorValue == 0)
         {
-            if (!doorCheckedAfterNeutralization)
-            {
-                GameStatistics.noMeasurementError++;
-                OpenDoor(false);
-            }
-            else
-                OpenDoor(true);
-        }
+            OpenDoor(true);
+        }*/
     }
 
     private void OpenDoor(bool againMeasurmentDone)

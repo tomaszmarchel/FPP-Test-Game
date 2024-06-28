@@ -40,12 +40,12 @@ public class Rifle : MonoBehaviour
             var hittedSlot = wallHitInfo.transform;
             if (hittedSlot.TryGetComponent<Wall>(out Wall wall))
             {
-                RoomWallShoot(wall);
+                OnWallHit(wall);
             }
         }
     }
 
-    private void RoomWallShoot(Wall wall)
+    private void OnWallHit(Wall wall)
     {
         var adjustmentRingValue = adjustmentRing.GetRingValue();
         var wallValue = wall.GetWallRingValue();
@@ -69,6 +69,22 @@ public class Rifle : MonoBehaviour
             var adjustmentRingValue = adjustmentRing.GetRingValue();
             var doorValue = door.GetDoorValue();
 
+            if (adjustmentRingValue == doorValue)
+            {
+                if (door.doorFirstCheck && door.doorCheckedAfterNeutralization)
+                    door.NeutralizeDoor();
+            }
+            else if (adjustmentRingValue > doorValue)
+            {
+                GameStatistics.tooHighRingValueDoorsError++;
+            }
+            else if (adjustmentRingValue < doorValue)
+            {
+                GameStatistics.tooLowRingValueDoorsError++;
+            }
+
+
+            /*
             if (!door.doorFirstCheck)
             {
                 if (adjustmentRingValue > doorValue)
@@ -80,12 +96,12 @@ public class Rifle : MonoBehaviour
                     GameStatistics.tooLowRingValueDoorsError++;
                 }
 
-                door.DestroyDoor();
+                //door.DestroyDoor();
             }
-            else if (doorValue == 0)
-            {
-                door.DestroyDoor();
-            }
+           // else if (doorValue == 0)
+            //{
+           //     door.DestroyDoor();
+           // }
             else
             {
                 if (adjustmentRingValue == doorValue)
@@ -94,7 +110,7 @@ public class Rifle : MonoBehaviour
                 }
                 else
                 {
-                    door.DestroyDoor();
+                    //door.DestroyDoor();
 
                     if (adjustmentRingValue > doorValue)
                     {
@@ -105,7 +121,7 @@ public class Rifle : MonoBehaviour
                         GameStatistics.tooLowRingValueDoorsError++;
                     }
                 }
-            }
+            }*/
         }
     }
 

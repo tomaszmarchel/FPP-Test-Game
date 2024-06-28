@@ -40,8 +40,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowStatistics()
     {
-        UISummaryController.gameObject.SetActive(true);
+        if (UISummaryController.gameObject.activeSelf)
+            return;
 
+        UISummaryController.gameObject.SetActive(true);
         UISummaryController.UpdateStatistics();
     }
 }
