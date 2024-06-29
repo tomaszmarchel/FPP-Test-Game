@@ -10,7 +10,6 @@ public class Rifle : MonoBehaviour
 
     private Player owner;
 
-    // Start is called before the first frame update
     void Start()
     {
         owner = Player.Instance;
@@ -18,11 +17,7 @@ public class Rifle : MonoBehaviour
 
     public void Shoot()
     {
-        owner.OnRifleShoot();
-
-
         // CAN ADD PARTICLES 
-
 
         Physics.Raycast(shootStartPoint.position, shootStartPoint.forward, out RaycastHit doorHitInfo, 20f, doorLayerMask);
         if (doorHitInfo.transform != null)
@@ -64,9 +59,6 @@ public class Rifle : MonoBehaviour
             }
         }
     }
-
-
-
     public int GetAdjustmentRingValue()
     {
         return adjustmentRing.GetRingValue();

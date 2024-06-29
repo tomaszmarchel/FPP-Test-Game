@@ -8,12 +8,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private RoomsController roomsController;
 
-    public static float secondStageStartTime = 0;
+    private float secondStageStartTime = 0;
     public enum GameStage
     {
         FirstStage,
         SecondStage,
-        ThirdStage
+        SummaryStage
     }
     public GameStage gameStage = GameStage.FirstStage;
 
@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         // TO TEST ON SECOND STAGE
-        FindRoomControllerRef();
+        // TO DELETE
+         //FindRoomControllerRef();
     }
 
     private void Start()
@@ -35,12 +36,12 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void GoToSecondStage()
+    public void LoadSecondStage()
     {
         StartCoroutine(LoadYourAsyncScene());   
     }
 
-    IEnumerator LoadYourAsyncScene()
+    private IEnumerator LoadYourAsyncScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(Loader.Scene.SecondStageScene.ToString(), LoadSceneMode.Additive);
 
@@ -55,7 +56,11 @@ public class GameManager : MonoBehaviour
 
         FindRoomControllerRef();
         secondStageStartTime = Time.timeSinceLevelLoad;
-    
+    }
+
+    public float GetSecondStageStartTime()
+    {
+        return secondStageStartTime;
     }
 
     private void FindRoomControllerRef()
@@ -67,9 +72,8 @@ public class GameManager : MonoBehaviour
     {
         CalculateMissedWalls();
 
-        gameStage = GameStage.ThirdStage;
+        gameStage = GameStage.SummaryStage;
         ShowStatistics();
-        Time.timeScale = 0.0f;
     }
 
     private void CalculateMissedWalls()

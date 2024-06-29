@@ -8,15 +8,13 @@ public class Player : MonoBehaviour
     [SerializeField] GameInput gameInput;
     [SerializeField] Rifle rifle;
     [SerializeField] MeasuringDevice measuringDevice;
-
-    public Door onInteractionDoor;
-
+    
     public event EventHandler OnRifleShootEvent;
 
-    public int playerHP = 3;
-    public int adjustmentRingValue = 0;
+    private Door onInteractionDoor;
 
-    public bool canInteract = false;
+    private int playerHP = 3;
+    private bool canInteract = false;
 
     private void Awake()
     {
@@ -26,9 +24,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameInput.Instance.OnWeaponShoot += GameInput_OnWeaponShoot;
-        GameInput.Instance.OnInteraction += GameInput_OnInteraction;
+        GameInput.Instance.OnDoorInteraction += GameInput_OnInteraction;
     }
 
+    // EVENT LISTENERS
+    #region EVENT LISTENERS
     private void GameInput_OnInteraction(object sender, System.EventArgs e)
     {
         if (canInteract)
@@ -40,7 +40,9 @@ public class Player : MonoBehaviour
     private void GameInput_OnWeaponShoot(object sender, System.EventArgs e)
     {
         rifle.Shoot();
+        OnRifleShootEvent?.Invoke(this, EventArgs.Empty);
     }
+    #endregion
 
     public void DecreasePlayerHP()
     {
@@ -53,9 +55,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnRifleShoot()
+    public int GetPlayerHP()
+    { 
+        return playerHP; 
+    }
+
+    public void SetPlayerCanInteract(bool value)
     {
-        OnRifleShootEvent?.Invoke(this, EventArgs.Empty);
+        canInteract = value;
+    }
+
+    public void SetPlayerInteractionDoors(Door door)
+    {
+        this.onInteractionDoor = door;
     }
 }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RackController : MonoBehaviour
 {
-    [SerializeField] private MoveableObjectSlotBase[] moveableSlots;
-
+    [SerializeField] private MoveableObjectSlotBase[] rackMoveableSlots;
+    // ZROBIC VISUALA DO TEGO
     public void TurnOffSlots()
     {
-        foreach (var slot in moveableSlots)
+        foreach (var slot in rackMoveableSlots)
         {
             slot.gameObject.SetActive(false);
         }
@@ -16,7 +16,7 @@ public class RackController : MonoBehaviour
 
     public void TurnOnSlots()
     {
-        foreach (var slot in moveableSlots)
+        foreach (var slot in rackMoveableSlots)
         {
             slot.gameObject.SetActive(true);
         }

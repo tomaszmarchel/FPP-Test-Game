@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] UIPlayerHPController UIPlayerHPController;
     [SerializeField] UISummaryController UISummaryController;
 
-    // Start is called before the first frame update
     void Awake()
     {
         Instance = this;

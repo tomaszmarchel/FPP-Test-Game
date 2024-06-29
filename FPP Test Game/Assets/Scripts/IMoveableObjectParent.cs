@@ -14,5 +14,5 @@ public interface IMoveableObjectParent
 
     public bool HasSelectedMoveableObject();
 
-    public MoveableObjectsTypes.Type GetSlotType();
+    public MoveableObjectsTypes.Type GetParentType();
 }

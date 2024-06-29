@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3541894187600077074, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.433
+      objectReference: {fileID: 0}
     - target: {fileID: 4809694367070040639, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: rackController
       value: 
@@ -76,9 +80,13 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.0028796785
       objectReference: {fileID: 0}
+    - target: {fileID: 6630485078500780760, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c6d480b100f2e1499a3a428c88d7822, type: 2}
     - target: {fileID: 7246612182916790884, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: slotType
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7246612182916790884, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: originalMoveableObejct
@@ -90,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: de3c1890be76892429d8e5867b2e33ea, type: 2}
     - target: {fileID: 8973661843676165007, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: slotType
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8973661843676165007, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: originalMoveableObejct

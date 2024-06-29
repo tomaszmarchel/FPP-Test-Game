@@ -8,7 +8,7 @@ public class Room : MonoBehaviour
     private RoomsController roomController;
 
     [SerializeField] Wall[] walls;
-    public List<Wall> wallsToHit;
+    private List<Wall> wallsToHit;
 
     private bool roomDestroyded = false;
 
@@ -35,7 +35,7 @@ public class Room : MonoBehaviour
         roomController.RoomDestroyded();
     }
 
-    public void RoomFinished()
+    private void RoomFinished()
     {
         GameStatistics.correctNeutralizedRooms++;
         roomController.RoomFinished();

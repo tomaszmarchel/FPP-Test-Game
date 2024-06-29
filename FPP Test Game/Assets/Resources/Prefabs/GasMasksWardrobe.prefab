@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5219421624448703337, guid: 99050021617d45a49b82671193763c46, type: 3}
       propertyPath: slotType
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5219421624448703337, guid: 99050021617d45a49b82671193763c46, type: 3}
       propertyPath: originalMoveableObejct
@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5798075370495234690, guid: 99050021617d45a49b82671193763c46, type: 3}
       propertyPath: slotType
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5798075370495234690, guid: 99050021617d45a49b82671193763c46, type: 3}
       propertyPath: originalMoveableObejct
@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.03330493
       objectReference: {fileID: 0}
+    - target: {fileID: 7558151481344098878, guid: 99050021617d45a49b82671193763c46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 350b6ce02d9aa7040a5597759a7fa676, type: 2}
     - target: {fileID: 8527761873513388761, guid: 99050021617d45a49b82671193763c46, type: 3}
       propertyPath: rackController
       value: 

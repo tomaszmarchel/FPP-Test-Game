@@ -18,7 +18,6 @@ public class WallSeparated : Wall
     public override void OnNextShootHit()
     {
         base.OnNextShootHit();
-
         secondWallPart.GetWallVisual().MarkWallVisualization(false);
     }
 

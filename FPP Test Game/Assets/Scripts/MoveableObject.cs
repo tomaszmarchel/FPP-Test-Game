@@ -9,10 +9,11 @@ public class MoveableObject : MonoBehaviour
 
     private IMoveableObjectParent moveableObjectParent;
 
-    public bool isAimedOnMe = false;
+    public bool isPlayerTarget = false;
     public bool selectedOnMe = false;
 
-    [SerializeField] bool hasSkinnedMeshRenderer = false;
+    public bool hasSkinnedMeshRenderer = false;
+
     [SerializeField] MeshRenderer[] meshRenderers;
     [SerializeField] SkinnedMeshRenderer[] skinnedMeshRenderers;
 
@@ -20,52 +21,43 @@ public class MoveableObject : MonoBehaviour
     [SerializeField] Material[] outlineYellowMaterialArray;
     [SerializeField] Material[] outlineGreenMaterialArray;
 
-
     public enum OutlineState
     {
         None,
-        Aimed,
+        Targeted,
         Seleceted
     }
 
     private OutlineState state;
 
-    private void Start()
+    private void Awake()
     {
         state = OutlineState.None;
     }
 
-
-    private void Update()
+    public void MoveableObjectIsPlayerTarget()
     {
-        if (isAimedOnMe)
+        if (GameInput.Instance.isMouseButtonDown)
         {
-            if (GameInput.Instance.isMouseButtonDown)
-            {
-                state = OutlineState.Seleceted;
-            }
-            else
-            {
-                state = OutlineState.Aimed;
-            }
-
-            if (state == OutlineState.Seleceted)
-            {
-                SetMoveableObjectParent(FirstStagePlayer.Instance);
-            }
-
-            ShowOutline();
+            state = OutlineState.Seleceted;
         }
         else
         {
-            HideOutline();
-            
+            state = OutlineState.Targeted;
         }
 
+        if (state == OutlineState.Seleceted)
+        {
+            SetMoveableObjectParent(FirstStagePlayer.Instance);
+        }
+
+        ShowOutline();
     }
 
-
-
+    public void MoveableObjectIsNotPlayerTarget()
+    {
+        HideOutline();
+    }
     public MoveableObjectSO GetMoveableObjectSO()
     {
         return moveableObjectSO;
@@ -84,13 +76,11 @@ public class MoveableObject : MonoBehaviour
         transform.parent = moveableObjectParent.GetSpawnPoint();
         transform.localPosition = Vector3.zero;
         transform.eulerAngles = Vector3.zero;
-
     }
 
     public void DestroySelf()
     {
         moveableObjectParent.ClearMoveableObject();
-
         Destroy(this.gameObject);
     }
 
@@ -103,9 +93,11 @@ public class MoveableObject : MonoBehaviour
         return moveableObject;
     }
 
-    public void ShowOutline()
+    //SHOW HIDE OUTLINE
+    #region SHOW/HIDE OUTLINE
+    private void ShowOutline()
     {
-        if (state == OutlineState.Aimed)
+        if (state == OutlineState.Targeted)
         {
             if (hasSkinnedMeshRenderer)
             {
@@ -134,9 +126,8 @@ public class MoveableObject : MonoBehaviour
         }
     }
 
-    public void HideOutline()
+    private void HideOutline()
     {
-        isAimedOnMe = false;
         state = OutlineState.None;
 
         if (hasSkinnedMeshRenderer)
@@ -149,6 +140,6 @@ public class MoveableObject : MonoBehaviour
             foreach (MeshRenderer meshRenderer in meshRenderers)
                 meshRenderer.SetMaterials(defaultMaterials.ToList());
         }
-
     }
+    #endregion
 }

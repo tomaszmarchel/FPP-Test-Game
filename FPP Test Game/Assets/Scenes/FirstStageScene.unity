@@ -205,17 +205,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109230203}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &204299771 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8527761873513388761, guid: 99050021617d45a49b82671193763c46, type: 3}
-  m_PrefabInstance: {fileID: 8645993024588944376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f17c0f0a5e4984980de2e77b196277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &281827120
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,17 +446,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1074009430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &368422929 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6694631307223863063, guid: 715cc794735a5df4e9381be7ef55fa6a, type: 3}
-  m_PrefabInstance: {fileID: 3411922750818128772}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f17c0f0a5e4984980de2e77b196277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &368422930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3626352607354998114, guid: 715cc794735a5df4e9381be7ef55fa6a, type: 3}
@@ -883,11 +861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f06e57a5a83dd4e934e21c387f97d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensivity: 2
-  multiplier: 3
+  multiplier: 2
   xSens: 200
   ySens: 200
-  orientation: {fileID: 0}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,11 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae9c365e9b7f99409efef6fd51ffc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wardrobes:
-  - {fileID: 204299771}
-  - {fileID: 1334746711482251021}
-  - {fileID: 368422929}
-  selectedWardrobe: {fileID: 0}
+  allWardrobes: []
 --- !u!4 &1136474762
 Transform:
   m_ObjectHideFlags: 0
@@ -1474,10 +1446,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6630485078500780760, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 350b6ce02d9aa7040a5597759a7fa676, type: 2}
+    - target: {fileID: 5886343243029982100, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7936814
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886343243029982100, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_Size.y
+      value: 0.63121116
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886343243029982100, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_Center.x
+      value: -0.094174005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886343243029982100, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_Center.y
+      value: -0.017548263
+      objectReference: {fileID: 0}
+    - target: {fileID: 8087138620930415377, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.538
+      objectReference: {fileID: 0}
     - target: {fileID: 9086373203122273600, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
       propertyPath: m_Name
       value: Wardrobe_GasMasks
@@ -1487,17 +1475,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
---- !u!114 &1334746711482251021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4809694367070040639, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
-  m_PrefabInstance: {fileID: 1334746711482251020}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f17c0f0a5e4984980de2e77b196277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1334746711482251023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3171669128504504394, guid: 778de299f58c6fe4aa4e5e2304e21b49, type: 3}
@@ -1551,10 +1528,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4779263906766952432, guid: 715cc794735a5df4e9381be7ef55fa6a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9c6d480b100f2e1499a3a428c88d7822, type: 2}
     - target: {fileID: 6939524166502219880, guid: 715cc794735a5df4e9381be7ef55fa6a, type: 3}
       propertyPath: m_Name
       value: Wardrobe_Weapon

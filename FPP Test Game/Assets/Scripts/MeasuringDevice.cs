@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MeasuringDevice : MonoBehaviour
 {
-    [SerializeField] private Transform cameraPosition;
-    [SerializeField] private LayerMask doorLayerMask;
-
     [SerializeField] MeasuringDeviceVisual measuringDeviceVisual;
 
-    public bool canDoMeasurement = true;
+    [SerializeField] private Transform cameraPosition;
+    
+    [SerializeField] private LayerMask doorLayerMask;
 
-    // Start is called before the first frame update
+    private bool canDoMeasurement = true;
+
     void Start()
     {
         GameInput.Instance.OnTakeMeasurement += GameInput_OnTakeMeasurement;
@@ -20,8 +20,12 @@ public class MeasuringDevice : MonoBehaviour
 
     private void GameInput_OnTakeMeasurement(object sender, System.EventArgs e)
     {
+        RaycastToDoor();
+    }
 
-            Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 6f, doorLayerMask);
+    private void RaycastToDoor()
+    {
+        Physics.Raycast(cameraPosition.position, cameraPosition.forward, out RaycastHit hitInfo, 6f, doorLayerMask);
         if (hitInfo.transform != null)
         {
             var hittedSlot = hitInfo.transform;
@@ -38,12 +42,16 @@ public class MeasuringDevice : MonoBehaviour
                         door.doorCheckedAfterNeutralization = true;
                 }
             }
-
         }
     }
 
     private int GetDoorValue(Door door)
     {
         return door.GetDoorValue();
+    }
+
+    public void SetCanDoMeasurement(bool value)
+    {
+        canDoMeasurement = value;
     }
 }

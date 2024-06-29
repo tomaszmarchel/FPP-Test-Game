@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameStatistics
-{/*
-    public GameStatistics Instance { get; private set; }
-
-    private void Awake()
-    {
-        Instance = this;
-    }*/
-
-    //STATS
+{
     public static float playingTime = 0;
 
     public static int correctNeutralizedDoors = 0;

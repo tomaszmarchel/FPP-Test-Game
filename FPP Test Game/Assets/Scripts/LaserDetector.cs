@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class LaserDetector : MonoBehaviour
 {
     public static LaserDetector Instance { get; private set; }
 
+
     [SerializeField] Transform rayStartPoint;
 
+    //LayerMasks
     [SerializeField] LayerMask wardrobeLayerMask;
     [SerializeField] LayerMask moveableObjectlayerMask;
     [SerializeField] LayerMask slotlayerMask;
@@ -39,7 +37,7 @@ public class LaserDetector : MonoBehaviour
             var hittedGameObject = hitInfo.transform;
             if (hittedGameObject.TryGetComponent<Wardrobe>(out Wardrobe wardrobe))
             {
-                FirstStagePlayer.Instance.AimingOnWardrobe(wardrobe);
+                FirstStagePlayer.Instance.TargettingAtWardrobe(wardrobe);
             }
         }
     }
@@ -51,7 +49,7 @@ public class LaserDetector : MonoBehaviour
         if (hitInfo.transform != null)
         {
             var hittedGameObject = hitInfo.transform;
-            FirstStagePlayer.Instance.AimedAtMoveableObject(hittedGameObject);
+            FirstStagePlayer.Instance.TargettingAtMoveableObject(hittedGameObject);
         }
         else
         {
@@ -68,12 +66,12 @@ public class LaserDetector : MonoBehaviour
             var hittedSlot = hitInfo.transform;
             if (hittedSlot.TryGetComponent<MoveableAvatarSlot>(out MoveableAvatarSlot moveableAvatarSlot))
             {
-                FirstStagePlayer.Instance.AimingOnSlot(moveableAvatarSlot);
+                FirstStagePlayer.Instance.TargettingAtSlot(moveableAvatarSlot);
             }
         }
         else
         {
-            FirstStagePlayer.Instance.NotLookingOnAnySlot();
+            FirstStagePlayer.Instance.NotTargettingAnySlot();
         }
     }
 }

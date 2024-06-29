@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15854f1db8527d745b4963bd04cf71d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualNumbers:
+  numbersGameObjectsArray:
   - {fileID: 8213261635868526045}
   - {fileID: 7111087384530589844}
   - {fileID: 3969235773357907418}
@@ -134,11 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bec5198d216694b918a2f193e1b624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measuringDeviceVisual: {fileID: 2506762184015734580}
   cameraPosition: {fileID: 0}
   doorLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  measuringDeviceVisual: {fileID: 2506762184015734580}
 --- !u!1 &1290935140673659282
 GameObject:
   m_ObjectHideFlags: 0

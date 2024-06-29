@@ -6,7 +6,7 @@ public class AvatarSlotChecker : MonoBehaviour
 {
     public static AvatarSlotChecker Instance { get; private set; }
 
-    [SerializeField] private MoveableAvatarSlot[] MoveableAvatarSlots;
+    [SerializeField] private MoveableAvatarSlot[] moveableAvatarSlots;
 
     private void Awake()
     {
@@ -15,18 +15,18 @@ public class AvatarSlotChecker : MonoBehaviour
 
     private void Start()
     {
-        GameInput.Instance.OnItemDrop += GameInput_OnItemDrop;
+        GameInput.Instance.OnMouseButtonUp += GameInput_OnMouseButtonUp;
     }
 
-    private void GameInput_OnItemDrop(object sender, System.EventArgs e)
+    private void GameInput_OnMouseButtonUp(object sender, System.EventArgs e)
     {
         if(AreAllItemsEquiped())
-            GameManager.Instance.GoToSecondStage();
+            GameManager.Instance.LoadSecondStage();
     }
 
-    public bool AreAllItemsEquiped()
+    private bool AreAllItemsEquiped()
     {
-        foreach (var item in MoveableAvatarSlots)
+        foreach (var item in moveableAvatarSlots)
         {
             if (item.GetMoveableObject() != null)
                 continue;

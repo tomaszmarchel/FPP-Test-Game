@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BaseInteractiveObject : MonoBehaviour
 {
-    public virtual void OnSelect()
+    public virtual void OnTarget()
     {
 
     }
 
-    public virtual void OnDeselect()
+    public virtual void OnUntarget()
     {
 
     }

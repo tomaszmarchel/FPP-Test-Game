@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class AdjustmentRing : MonoBehaviour
 {
+    private int ringValue = 0;
+
     private int minRingValue = 0;
     private int maxRingValue = 9;
-
     private int minRingValuePlusOne = 1;
     private int maxRingValueMinusOne = 8;
 
-    private int ringValue = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameInput.Instance.OnDecreaseRing += GameInput_OnDecreaseRing;

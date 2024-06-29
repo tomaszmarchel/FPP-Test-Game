@@ -12,9 +12,8 @@ public static class MoveableObjectsTypes
         Pants,
         Shoes,
         Kevlar,
-        Belt,
         GasMask,
         Weapon,
-        AdjustmentDevice
+        MeasuringDevice
     }
 }

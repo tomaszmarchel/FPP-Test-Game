@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MeasuringDeviceVisual : MonoBehaviour
 {
-    [SerializeField] private GameObject[] visualNumbers;
+    [SerializeField] private GameObject[] numbersGameObjectsArray;
     private MeasuringDevice owner;
+    
+    private Coroutine coroutine;
 
     private float visibleTime = 1.5f;
-
-    private Coroutine coroutine;
 
 
     public void Awake()
@@ -17,34 +17,24 @@ public class MeasuringDeviceVisual : MonoBehaviour
         owner = GetComponentInParent<MeasuringDevice>();
     }
 
-    private void CoroutineCheck()
-    {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
-    }
-
     private IEnumerator TurnOnVisualValues(int value)
     {
         visibleTime = 1.5f;
         while (visibleTime > 0)
         {
-            owner.canDoMeasurement = false;
+            owner.SetCanDoMeasurement(false);
             visibleTime -= Time.deltaTime;
-            visualNumbers[value].gameObject.SetActive(true);
+            numbersGameObjectsArray[value].gameObject.SetActive(true);
             yield return null;
         }
 
-        visualNumbers[value].gameObject.SetActive(false);
+        numbersGameObjectsArray[value].gameObject.SetActive(false);
         coroutine = null;
         yield break;
     }
 
     public void SetVisualNumber(int value)
     {
-        //CoroutineCheck();
         if (coroutine == null)
             coroutine = StartCoroutine(TurnOnVisualValues(value));
     }

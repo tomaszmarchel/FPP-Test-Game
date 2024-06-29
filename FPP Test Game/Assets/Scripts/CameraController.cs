@@ -1,31 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float sensivity = 2f;
+    [SerializeField] private float multiplier;
 
-    public float multiplier;
-
-    public float xSens = 100f;
-    public float ySens = 100f;
+    [SerializeField] private float xSens = 100f;
+    [SerializeField] private float ySens = 100f;
     private float xRot, yRot;
 
-    public Transform orientation;
-
-
-    private Vector2 mouseMoveVector;
-
-
-    void Start()
+    private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false; 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float xMouse = Input.GetAxisRaw("Mouse X") * Time.deltaTime * xSens * multiplier;

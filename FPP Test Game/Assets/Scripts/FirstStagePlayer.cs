@@ -8,10 +8,11 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
     public static FirstStagePlayer Instance { get; private set; }
     
     private BaseInteractiveObject interactiveObject;
-    private MoveableObject aimedMoveableObject;
     private IMoveableObjectParent avatarSlot;
-
+    
+    private MoveableObject targetedMoveableObject;
     private MoveableObject holdingObject;
+
     [SerializeField] private Transform holdItemPoint;
 
     private void Awake()
@@ -21,25 +22,26 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
 
     private void Start()
     {
-        GameInput.Instance.OnItemDrop += GameInput_OnMouseButtonUp;
+        GameInput.Instance.OnMouseButtonUp += GameInput_OnMouseButtonUp;
     }
 
     private void GameInput_OnMouseButtonUp(object sender, EventArgs e)
     {
         if (holdingObject != null)
         {
-            if (avatarSlot != null)
+            DropMoveableObject();
+        }
+    }
+
+    private void DropMoveableObject()
+    {
+        if (avatarSlot != null)
+        {
+            if (avatarSlot.GetParentType() == holdingObject.GetMoveableObjectSO().itemType)
             {
-                if (avatarSlot.GetSlotType() == holdingObject.GetMoveableObjectSO().itemType)
+                if (avatarSlot.GetMoveableObject() == null)
                 {
-                    if (avatarSlot.GetMoveableObject() == null)
-                    {
-                        holdingObject.SetMoveableObjectParent(avatarSlot);
-                    }
-                    else
-                    {
-                        holdingObject.DestroySelf();
-                    }
+                    holdingObject.SetMoveableObjectParent(avatarSlot);
                 }
                 else
                 {
@@ -51,9 +53,13 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
                 holdingObject.DestroySelf();
             }
         }
+        else
+        {
+            holdingObject.DestroySelf();
+        }
     }
 
-    public void AimedAtMoveableObject(Transform selectedItem)
+    public void TargettingAtMoveableObject(Transform selectedItem)
     {
         if (selectedItem.TryGetComponent<MoveableObject>(out MoveableObject moveableObject))
         {
@@ -61,11 +67,11 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
         }
         else
         {
-            if (aimedMoveableObject != null)
+            if (targetedMoveableObject != null)
             {
-
-                aimedMoveableObject.isAimedOnMe = false;
-                aimedMoveableObject = null;
+                //targetedMoveableObject.isPlayerTarget = false;
+                targetedMoveableObject.MoveableObjectIsNotPlayerTarget();
+                targetedMoveableObject = null;
             }
         }
     }
@@ -73,28 +79,30 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
     private void WardrobeInteraction(Wardrobe selectedWardrobe)
     {
         interactiveObject = selectedWardrobe;
-        interactiveObject.OnSelect();
+        interactiveObject.OnTarget();
     }
 
     private void MoveableItemAimedAt(MoveableObject moveableObject)
     {
-        if (moveableObject == aimedMoveableObject || aimedMoveableObject == null)
+        if (moveableObject == targetedMoveableObject || targetedMoveableObject == null)
         {
-            aimedMoveableObject = moveableObject;
-            aimedMoveableObject.isAimedOnMe = true;
+            targetedMoveableObject = moveableObject;
+            targetedMoveableObject.MoveableObjectIsPlayerTarget();
+            //targetedMoveableObject.isPlayerTarget = true;
         }
     }
 
     public void NotLookingOnAnyMoveableObject()
     {
-        if (aimedMoveableObject != null)
+        if (targetedMoveableObject != null)
         {
-            aimedMoveableObject.isAimedOnMe = false;
-            aimedMoveableObject = null;
+            targetedMoveableObject.MoveableObjectIsNotPlayerTarget();
+            //targetedMoveableObject.isPlayerTarget = false;
+            targetedMoveableObject = null;
         }
     }
 
-    public void NotLookingOnAnySlot()
+    public void NotTargettingAnySlot()
     {
         if (avatarSlot != null)
         {
@@ -102,24 +110,18 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
         }
     }
 
-    public void AimingOnSlot(IMoveableObjectParent moveableObjectParent)
+    public void TargettingAtSlot(IMoveableObjectParent moveableObjectParent)
     {
         avatarSlot = moveableObjectParent;
     }
 
-    public void AimingOnWardrobe(Wardrobe wardrobe)
+    public void TargettingAtWardrobe(Wardrobe wardrobe)
     {
         WardrobeInteraction(wardrobe);
     }
 
-    public void AimingOnMoveableObject(MoveableObject moveableObject)
-    {
-        MoveableItemAimedAt(moveableObject);
-    }
-
-
-    // interface
-
+    // Interface implementation
+    #region INTERFACE IMPLEMENTATION
     public Transform GetSpawnPoint()
     {
         return holdItemPoint;
@@ -147,8 +149,9 @@ public class FirstStagePlayer : MonoBehaviour, IMoveableObjectParent
         return holdingObject != null;
     }
 
-    public MoveableObjectsTypes.Type GetSlotType()
+    public MoveableObjectsTypes.Type GetParentType()
     {
         return holdingObject.GetMoveableObjectSO().itemType;
     }
+    #endregion
 }

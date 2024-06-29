@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab04ddd39bb7db4fb35d0d1b83929c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveableAvatarSlots:
+  moveableAvatarSlots:
   - {fileID: 6997534362685291210}
   - {fileID: 7969607164636854917}
   - {fileID: 5672948526898185269}

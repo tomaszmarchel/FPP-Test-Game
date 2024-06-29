@@ -39,14 +39,14 @@ public class DoorTrigger : MonoBehaviour
     private void PlayerAtTheDoor()
     {
         UIManager.Instance.ShowInteractionText();
-        Player.Instance.canInteract = true;
-        Player.Instance.onInteractionDoor = owner;
+        Player.Instance.SetPlayerCanInteract(true);
+        Player.Instance.SetPlayerInteractionDoors(owner);
     }
 
     private void PlayerOutsideTheDoor()
     {
         UIManager.Instance.HideInteractionText();
-        Player.Instance.canInteract = false;
-        Player.Instance.onInteractionDoor = null;
+        Player.Instance.SetPlayerCanInteract(false);
+        Player.Instance.SetPlayerInteractionDoors(null);
     }
 }

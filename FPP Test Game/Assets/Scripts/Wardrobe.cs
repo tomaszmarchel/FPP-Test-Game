@@ -15,41 +15,38 @@ public class Wardrobe : BaseInteractiveObject
         Closed
     }
 
+    public WardrobeState GetWardobeState()   
+    {
+        return state;
+    }
+
+    [SerializeField] private WardrobeState state;
+
+
     [SerializeField] private RackController rackController;
 
     [SerializeField] private Transform openedPoint;
     [SerializeField] private Transform closedPoint;
 
-    [SerializeField] private WardrobeState state;
     private Coroutine coroutine;
 
-    public WardrobeState GetWardobeState()
-    {
-        return state;
-    }
-
-    public bool amISelected = false;
+    private bool amISelected = false;
 
     private void Start()
     {
-        wardrobeController = WardrobeController.Instance;
         state = WardrobeState.Closed;
+        wardrobeController = WardrobeController.Instance;
+
         rackController.TurnOffSlots();
     }
 
-    private void Update()
+    public override void OnTarget()
     {
-        // if am im selected
-    }
-
-    public override void OnSelect()
-    {
-        // Open WArdrobe
         wardrobeController.SetSelectedWardrobe(this);
         amISelected = true;
     }
 
-    public override void OnDeselect()
+    public override void OnUntarget()
     {
         amISelected = false;
         Close();
@@ -62,17 +59,23 @@ public class Wardrobe : BaseInteractiveObject
            StopCorountines();
            Open();
         }
-        else
-            WaitToOpen();
     }
 
-    public void Open()
+    private bool CanIOpen()
+    {
+        if (wardrobeController.IsAnyOtherWardrobeOpen(this))
+            return false;
+        else
+            return true;
+    }
+
+    private void Open()
     {
         if (coroutine == null)
             coroutine = StartCoroutine(OpenCoroutine());
     }
 
-    public void Close()
+    private void Close()
     {
         if (coroutine != null)
         {
@@ -81,30 +84,10 @@ public class Wardrobe : BaseInteractiveObject
         coroutine = StartCoroutine(CloseCoroutine());
     }
 
-    public void WaitToOpen()
-    {
+    //COROUTINES
+    #region OPEN/CLOSE COROUTINES
 
-    }
-
-    public bool CanIOpen()
-    {
-        if (wardrobeController.isAnyOtherWardrobeOpen(this))
-            return false;
-        else
-            return true;
-    }
-
-    private void StopCorountines()
-    {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
-    }
-
-
-    public IEnumerator OpenCoroutine()
+    private IEnumerator OpenCoroutine()
     {
         rackController.TurnOnSlots();
 
@@ -124,7 +107,7 @@ public class Wardrobe : BaseInteractiveObject
         }
     }
 
-    public IEnumerator CloseCoroutine()
+    private IEnumerator CloseCoroutine()
     {
         while (state != WardrobeState.Closed)
         {
@@ -145,4 +128,13 @@ public class Wardrobe : BaseInteractiveObject
         }
     }
 
+    private void StopCorountines()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+    }
+    #endregion
 }

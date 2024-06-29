@@ -10,13 +10,8 @@ public class MoveableWardobeSlot : MoveableObjectSlotBase
         MoveableObject.SpawnArmoryObject(originalMoveableObejct.GetMoveableObjectSO(), this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (moveableObjectInSlot == null)
-            MoveableObject.SpawnArmoryObject(originalMoveableObejct.GetMoveableObjectSO(), this);
-    }
-
+    //INTERAFACE IMPLEMENTATION
+    #region INTERFACE
     public override Transform GetSpawnPoint()
     {
         return spawnPoint;
@@ -35,10 +30,13 @@ public class MoveableWardobeSlot : MoveableObjectSlotBase
     public override void ClearMoveableObject()
     {
         moveableObjectInSlot = null;
+
+        MoveableObject.SpawnArmoryObject(originalMoveableObejct.GetMoveableObjectSO(), this);
     }
 
     public override bool HasSelectedMoveableObject()
     {
         return moveableObjectInSlot != null;
     }
+    #endregion
 }

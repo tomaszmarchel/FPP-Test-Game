@@ -9,7 +9,7 @@ public class UIPlayerHPController : MonoBehaviour
 
     public void DecreasePlayerHP()
     {
-        if (Player.Instance.playerHP >= 0) 
-            playerHpPointIcons[Player.Instance.playerHP].SetActive(false);
+        if (Player.Instance.GetPlayerHP() >= 0) 
+            playerHpPointIcons[Player.Instance.GetPlayerHP()].SetActive(false);
     }
 }

@@ -45,7 +45,7 @@ public class Door : MonoBehaviour
             Destroy(doorTrigger.gameObject);
     }
 
-    public void DestroyDoor()
+    private void DestroyDoor()
     {
         doorDestroyded = true;
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AdjustmentRingVisual : MonoBehaviour
 {
-// Start is called before the first frame update
     void Start()
     {
         GameInput.Instance.OnDecreaseRing += GameInput_OnDecreaseRing;

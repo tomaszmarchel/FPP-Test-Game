@@ -6,14 +6,10 @@ public class MoveableObjectSlotBase : MonoBehaviour, IMoveableObjectParent
 {
     public MoveableObject moveableObjectInSlot;
     public Transform spawnPoint;
-
     public MoveableObjectsTypes.Type slotType;
 
-    // Start is called before the first frame update
-
-
-    //interface
-
+    //INTERFACE IMPLEMENTATION
+    #region INTERFACE
     public virtual Transform GetSpawnPoint()
     {
         return spawnPoint;
@@ -39,8 +35,9 @@ public class MoveableObjectSlotBase : MonoBehaviour, IMoveableObjectParent
         return moveableObjectInSlot != null;
     }
 
-    public virtual MoveableObjectsTypes.Type GetSlotType()
+    public virtual MoveableObjectsTypes.Type GetParentType()
     {
         return slotType;
     }
+    #endregion
 }

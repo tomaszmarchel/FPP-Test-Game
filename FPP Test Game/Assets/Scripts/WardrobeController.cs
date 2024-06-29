@@ -6,9 +6,8 @@ public class WardrobeController : MonoBehaviour
 {
     public static WardrobeController Instance { get; private set; }
 
-    [SerializeField] private Wardrobe[] wardrobes;
-
-    public Wardrobe selectedWardrobe;
+    [SerializeField] private Wardrobe[] allWardrobes;
+    private Wardrobe selectedWardrobe;
 
     private void Awake()
     {
@@ -19,18 +18,12 @@ public class WardrobeController : MonoBehaviour
     {
         if (selectedWardrobe == null)
         {
-            Debug.Log("seleceted new wardrobe");
-            selectedWardrobe = newSelectedWardrobe;
-
-            // first selected wardrobe
-            // open wardrobe
-        }
+            selectedWardrobe = newSelectedWardrobe;}
         else
         {
             if (newSelectedWardrobe != selectedWardrobe)
             {
-                Debug.Log("deseleceted wardrobe" + selectedWardrobe.name);
-                selectedWardrobe.OnDeselect();
+                selectedWardrobe.OnUntarget();
                 selectedWardrobe = null;
             }
             else
@@ -41,11 +34,9 @@ public class WardrobeController : MonoBehaviour
         }
     }
 
-
-
-    public bool isAnyOtherWardrobeOpen(Wardrobe asker)
+    public bool IsAnyOtherWardrobeOpen(Wardrobe asker)
     {
-        foreach (var wardrobe in wardrobes)
+        foreach (var wardrobe in allWardrobes)
         {
             if (wardrobe == asker)
                 continue;
@@ -55,5 +46,4 @@ public class WardrobeController : MonoBehaviour
         }
         return false;
     }
-    
 }
