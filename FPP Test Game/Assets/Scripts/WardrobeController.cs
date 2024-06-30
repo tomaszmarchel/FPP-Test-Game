@@ -12,6 +12,8 @@ public class WardrobeController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        allWardrobes = GetComponentsInChildren<Wardrobe>();
     }
 
     public void SetSelectedWardrobe(Wardrobe newSelectedWardrobe)

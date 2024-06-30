@@ -13,15 +13,12 @@ public class AvatarSlotChecker : MonoBehaviour
         Instance = this;    
     }
 
-    private void Start()
+    public void CheckAllItemsAreEquipped()
     {
-        GameInput.Instance.OnMouseButtonUp += GameInput_OnMouseButtonUp;
-    }
-
-    private void GameInput_OnMouseButtonUp(object sender, System.EventArgs e)
-    {
-        if(AreAllItemsEquiped())
+        if (AreAllItemsEquiped())
+        {
             GameManager.Instance.LoadSecondStage();
+        }
     }
 
     private bool AreAllItemsEquiped()

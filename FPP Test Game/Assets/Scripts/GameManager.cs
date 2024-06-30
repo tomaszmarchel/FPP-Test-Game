@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        // TO TEST ON SECOND STAGE
+        // TO START TEST ON SECOND STAGE
         // TO DELETE
-         //FindRoomControllerRef();
+        //FindRoomControllerRef();
     }
 
     private void Start()
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(Loader.Scene.SecondStageScene.ToString()));
         gameStage = GameStage.SecondStage;
+
         SceneManager.UnloadSceneAsync(Loader.Scene.FirstStageScene.ToString());
 
         FindRoomControllerRef();

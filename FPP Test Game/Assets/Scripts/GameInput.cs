@@ -63,8 +63,13 @@ public class GameInput : MonoBehaviour
         }
         else if (GameManager.Instance.gameStage == GameManager.GameStage.SummaryStage)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
                 OnGameOverExit?.Invoke(this, EventArgs.Empty);
+
+
+            }
         }
     }
 }

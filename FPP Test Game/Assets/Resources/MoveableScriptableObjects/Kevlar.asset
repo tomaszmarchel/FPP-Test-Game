@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Kevlar
   m_EditorClassIdentifier: 
   prefab: {fileID: 4667179684881007825, guid: 60b150540e74ce44e8e051bc42ff44b6, type: 3}
-  itemType: 3
+  itemType: 4
   itemName: Kevlar

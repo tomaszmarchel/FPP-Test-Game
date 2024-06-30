@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GasMask2
   m_EditorClassIdentifier: 
   prefab: {fileID: 1744914803912648321, guid: f390b72e9973e3247b1fdaba25d75614, type: 3}
-  itemType: 6
+  itemType: 5
   itemName: Gas Mask2

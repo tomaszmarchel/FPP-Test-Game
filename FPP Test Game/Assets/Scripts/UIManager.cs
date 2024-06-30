@@ -9,13 +9,14 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] TMP_Text interactionText;
-    [SerializeField] UIPlayerHPController UIPlayerHPController;
-    [SerializeField] UISummaryController UISummaryController;
+    [SerializeField] UIPlayerHPController uIPlayerHPController;
+    [SerializeField] UISummaryController uISummaryController;
+    [SerializeField] GameObject keyBingingsSprite;
 
     void Awake()
     {
         Instance = this;
-        interactionText.gameObject.SetActive(false);
+        uISummaryController.gameObject.SetActive(false);
     }
 
     public void ShowInteractionText()
@@ -33,15 +34,16 @@ public class UIManager : MonoBehaviour
 
     public void DecreasePlayerHPUI()
     {
-        UIPlayerHPController.DecreasePlayerHP();
+        uIPlayerHPController.DecreasePlayerHP();
     }
 
     public void ShowStatistics()
     {
-        if (UISummaryController.gameObject.activeSelf)
+        if (uISummaryController.gameObject.activeSelf)
             return;
 
-        UISummaryController.gameObject.SetActive(true);
-        UISummaryController.UpdateStatistics();
+        keyBingingsSprite.SetActive(false);
+        uISummaryController.gameObject.SetActive(true);
+        uISummaryController.UpdateStatistics();
     }
 }

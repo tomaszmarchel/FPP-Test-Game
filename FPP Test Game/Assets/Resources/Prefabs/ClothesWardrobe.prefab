@@ -161,11 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f889c22dceb35642b1761bd416c4701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveableSlots:
+  rackMoveableSlots:
   - {fileID: 5798075370495234690}
   - {fileID: 5219421624448703337}
   - {fileID: 291860198427688678}
   - {fileID: 2542105447342817911}
+  - {fileID: 3392105391269253149}
 --- !u!65 &7302507942972490610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,7 +285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 929ae9aad496d0245a1dcb62f70ecd80, type: 2}
+  - {fileID: 2100000, guid: 07d252e0c29e4a947a68494214a4f54c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -355,11 +356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f17c0f0a5e4984980de2e77b196277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   rackController: {fileID: 4132911241471686420}
   openedPoint: {fileID: 5158471338312279247}
   closedPoint: {fileID: 978638437338047692}
-  state: 0
-  amISelected: 0
 --- !u!65 &2918571920200282522
 BoxCollider:
   m_ObjectHideFlags: 0

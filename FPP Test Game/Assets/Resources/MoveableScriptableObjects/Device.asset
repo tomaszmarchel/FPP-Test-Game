@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Device
   m_EditorClassIdentifier: 
   prefab: {fileID: 6416761706979359612, guid: a1eb75b2f9935a4428e091461698d8b2, type: 3}
-  itemType: 8
+  itemType: 7
   itemName: Device

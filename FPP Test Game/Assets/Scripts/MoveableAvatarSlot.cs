@@ -17,6 +17,8 @@ public class MoveableAvatarSlot : MoveableObjectSlotBase
     {
         this.moveableObjectInSlot = moveableObject;
         visualTransparentBox.gameObject.SetActive(false);
+
+        AvatarSlotChecker.Instance.CheckAllItemsAreEquipped();
     }
 
     public override MoveableObject GetMoveableObject()
